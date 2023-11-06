@@ -1,0 +1,103 @@
+  <div id="app">
+    <div id="headBar">
+      <h1 class="sorteo" (click)="resetearSorteo()" [ngClass]="{'clickable': finish }">Sorteo 2022</h1>
+      <div style="display: flex; align-items: center;">
+        <div id="iconGroup">
+          <mat-icon class="svgIcon" svgIcon="consultatioBlanco"></mat-icon>
+            <span class="separator"></span>
+          <mat-icon class="svgIcon scndIcon" svgIcon="nordeltaBlanco"></mat-icon>
+        </div>
+        <span class="separator"></span>
+        <img src="assets/asset-img.png" style="height: 50px;">
+      </div>
+
+    </div>
+    <div id="appBody">
+
+      <div *ngIf="!start" class="numerosInputContainer">
+        <div style="display: flex;">
+          <div class="inputs">
+            <span class="inputTitle">Sorteo 1</span>
+            <mat-form-field class="inputNumero" appearance="fill">
+              <mat-label>Desde</mat-label>
+              <input [(ngModel)]="participanteDesdePrimero" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+              <mat-label>Hasta</mat-label>
+              <input [(ngModel)]="participanteHastaPrimero" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+              <mat-label>Cantidad de Premios</mat-label>
+              <input [(ngModel)]="cantidadPremiosPrimero" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+              <mat-label>Premio</mat-label>
+              <input [(ngModel)]="premioPrimero" matInput type="text">
+            </mat-form-field>
+          </div>
+          <div class="inputs" style="margin-left: 3em;">
+            <span class="inputTitle">Sorteo 2</span>
+            <mat-form-field class="inputNumero" appearance="fill">
+              <mat-label>Desde</mat-label>
+              <input [(ngModel)]="participanteDesdeSegundo" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+              <mat-label>Hasta</mat-label>
+              <input [(ngModel)]="participanteHastaSegundo" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+              <mat-label>Cantidad de Premios</mat-label>
+              <input [(ngModel)]="cantidadPremiosSegundo" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+              <mat-label>Premio</mat-label>
+              <input [(ngModel)]="premioSegundo" matInput type="text">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <button mat-fab class="okBtn startSorteoBtn" (click)="startSorteo()">
+          <mat-icon>done</mat-icon>
+        </button>
+      </div>
+
+      <div id=sorteoContainer *ngIf="start">
+        <div *ngIf="finish" class="finDeSorteo">
+          <h1>¡Sorteo finalizado!</h1>
+        </div>
+        <div *ngIf="!finish" id="buttons">
+  
+          <button mat-fab class="shuffleBtn" [disabled]="finish || sorteandoNoBtns" (click)="generateWinner()">
+            <mat-icon>shuffle</mat-icon>
+          </button>
+  
+          <div id="randomGenerator">
+            <div *ngIf="!sorteando" style="display: flex;">
+              <div *ngFor="let letter of cantidadCifras" class="cifra"> – </div>
+            </div>
+            <div *ngIf="sorteando" style="display: flex;">
+              <div *ngFor="let item of showWinnerNumber" class="cifra">
+                <span *ngIf="!item.show" style="color: #3080e3">{{item.placeholder}}</span>
+                <span *ngIf="item.show" style="color: #173254;">{{item.letter}}</span>
+              </div>
+            </div>
+          </div>
+  
+          <button mat-fab class="okBtn" (click)="saveResult()" [disabled]="finish || sorteandoNoBtns || winner === null">
+            <mat-icon>done</mat-icon>
+          </button>
+        </div>
+  
+        <div id="resultados">
+          <div class="resultadoContainer cabeceraTabla">
+            <span>Premio</span>
+            <span>Número</span>
+          </div>
+          <div class="resultadoContainer itemsTabla" *ngFor="let result of results">
+            <span>{{result.premio}}</span>
+            <div>{{result.numero}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

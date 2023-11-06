@@ -1,0 +1,138 @@
+#app {
+    width: 100%;
+    height: 100%;
+    background: #173254;
+    display: flex;
+    flex-direction: column;
+}
+
+#headBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin: 0px 150px;
+}
+
+#appBody, #sorteoContainer {
+    height: -webkit-fill-available;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: inherit;
+}
+
+.sorteo {
+    font-family: 'LatinxText-Bold';
+}
+
+#buttons {
+    display: flex;
+    margin: 1.5em;
+    align-items: center;
+}
+
+.okBtn{
+    background-color: #00B050;
+}
+.shuffleBtn {
+    background-color: #173254;
+}
+.clickable {
+    cursor: pointer;
+}
+
+#iconGroup {
+    display: flex;
+    align-items: center;
+    position: relative;
+    right: -140px;
+}
+
+.svgIcon {
+    width: 150px;
+    height: 50px;
+}
+
+.scndIcon {
+    width: 300px;
+    height: 54px;
+}
+
+.separator {
+    width: 1px;
+    height: 43px;
+    margin: 0 19px;
+    opacity: 0.36;  
+    background-color: #979797;
+}
+
+#resultados{
+    width: -webkit-fill-available;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.resultadoContainer{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #f3f3f3;
+    color: #173254;
+}
+
+.cabeceraTabla {
+    font-size: 38px;
+}
+.cabeceraTabla span {
+    font-family: "LatinxText-Bold";
+}
+.itemsTabla {
+    font-size: 34px;
+}
+
+
+.numerosInputContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.numerosInputContainer .inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputTitle{
+    text-align: center;
+    margin-bottom: 0.5em;
+    font-size: 20px;
+    color: #173254;
+}
+
+.startSorteoBtn {
+    margin-left: 3em;
+}
+
+#randomGenerator {
+    margin-left: 3em;
+    margin-right: 3em;
+    height: 100px;
+    overflow: hidden;
+}
+
+.cifra{
+    font-size: 80px;
+    height: 110px;
+    width: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.finDeSorteo h1{
+    font-size: 58px;
+    color: #173254;
+}

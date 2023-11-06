@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'LatinxText';
+    src: url('assets/fonts/LatinxText-Regular.otf') format('opentype');
+}
+@font-face {
+    font-family: 'LatinxText-Bold';
+    src: url('assets/fonts/LatinxText-Bold.otf') format('opentype');
+}
+
+* {
+    font-family: 'LatinxText';
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
