@@ -14,12 +14,12 @@ export class SvgService {
    init() {
     this.matIconRegistry.addSvgIcon(
       "consultatioBlanco",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("app-sorteo/assets/icons/consultatio-logo-blanco.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/consultatio-logo-blanco.svg")
     );
 
     this.matIconRegistry.addSvgIcon(
       "nordeltaBlanco",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("app-sorteo/assets/icons/nordelta-blanco.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/nordelta-blanco.svg")
     );
   }
 }
