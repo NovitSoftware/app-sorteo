@@ -1,0 +1,24 @@
+#resultados{
+    width: -webkit-fill-available;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.resultadoContainer{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #f3f3f3;
+    color: #173254;
+}
+
+.cabeceraTabla {
+    font-size: 38px;
+}
+.cabeceraTabla span {
+    font-family: "LatinxText-Bold";
+}
+.itemsTabla {
+    font-size: 34px;
+}

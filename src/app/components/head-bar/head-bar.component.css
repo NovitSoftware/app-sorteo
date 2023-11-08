@@ -1,0 +1,40 @@
+#headBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin: 0px 150px;
+}
+
+.sorteo {
+    font-family: 'LatinxText-Bold';
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+#iconGroup {
+    display: flex;
+    align-items: center;
+    position: relative;
+    right: -140px;
+}
+
+.svgIcon {
+    width: 150px;
+    height: 50px;
+}
+
+.scndIcon {
+    width: 300px;
+    height: 54px;
+}
+
+.separator {
+    width: 1px;
+    height: 43px;
+    margin: 0 19px;
+    opacity: 0.36;  
+    background-color: #979797;
+}

@@ -1,0 +1,46 @@
+#sorteoContainer {
+    height: -webkit-fill-available;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: inherit;
+}
+
+.finDeSorteo h1{
+    font-size: 58px;
+    color: #173254;
+}
+
+#buttons {
+    display: flex;
+    margin: 1.5em;
+    align-items: center;
+}
+
+.okBtn{
+    background-color: #00B050;
+}
+.shuffleBtn {
+    background-color: #173254;
+}
+
+.cifra{
+    font-size: 80px;
+    height: 110px;
+    width: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#randomGenerator {
+    margin-left: 3em;
+    margin-right: 3em;
+    height: 100px;
+    overflow: hidden;
+}
+
+.fullWidth {
+    width: -webkit-fill-available;
+}

@@ -1,0 +1,2 @@
+<app-init-form2022 [ngClass]="{'hidden': status.start}" (fireStartSorteo)="startSorteo($event)"></app-init-form2022>
+<app-slots-sorteo2022 #slotsSorteo class="fullWidth" [ngClass]="{'hidden': !status.start}" [status]="status" ></app-slots-sorteo2022>

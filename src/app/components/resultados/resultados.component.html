@@ -1,0 +1,10 @@
+<div id="resultados">
+    <div class="resultadoContainer cabeceraTabla">
+        <span>Premio</span>
+        <span>Número</span>
+    </div>
+    <div class="resultadoContainer itemsTabla" *ngFor="let result of results">
+        <span>{{result.premio}}</span>
+        <div>{{result.numero}}</div>
+    </div>
+</div>

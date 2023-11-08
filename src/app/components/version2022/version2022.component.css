@@ -1,0 +1,7 @@
+.hidden {
+    display: none;
+}
+
+.fullWidth {
+    width: -webkit-fill-available;
+}
