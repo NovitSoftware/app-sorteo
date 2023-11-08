@@ -1,46 +1,46 @@
-<div class="numerosInputContainer">
+<div id="numerosInputContainer">
     <div style="display: flex;">
-    <form [formGroup]="formPrimero" class="inputs">
-        <span class="inputTitle">Sorteo 1</span>
-        <mat-form-field class="inputNumero" appearance="fill">
-            <mat-label>Desde</mat-label>
-            <input formControlName="desdeParticipante" matInput type="number">
-        </mat-form-field>
-        <mat-form-field class="inputNumero" appearance="fill">
-            <mat-label>Hasta</mat-label>
-            <input formControlName="hastaParticipante" matInput type="number">
-        </mat-form-field>
-        <mat-form-field class="inputNumero" appearance="fill">
-            <mat-label>Cantidad de Premios</mat-label>
-            <input formControlName="cantidad" matInput type="number">
-        </mat-form-field>
-        <mat-form-field class="inputNumero" appearance="fill">
-            <mat-label>Premio</mat-label>
-            <input formControlName="premio" matInput type="text">
-        </mat-form-field>
-    </form>
-    <form [formGroup]="formSegundo" class="inputs" style="margin-left: 3em;">
-        <span class="inputTitle">Sorteo 2</span>
-        <mat-form-field class="inputNumero" appearance="fill">
-            <mat-label>Desde</mat-label>
-            <input formControlName="desdeParticipante" matInput type="number">
-        </mat-form-field>
-        <mat-form-field class="inputNumero" appearance="fill">
-            <mat-label>Hasta</mat-label>
-            <input formControlName="hastaParticipante" matInput type="number">
-        </mat-form-field>
-        <mat-form-field class="inputNumero" appearance="fill">
-            <mat-label>Cantidad de Premios</mat-label>
-            <input formControlName="cantidad" matInput type="number">
-        </mat-form-field>
-        <mat-form-field class="inputNumero" appearance="fill">
-            <mat-label>Premio</mat-label>
-            <input formControlName="premio" matInput type="text">
-        </mat-form-field>
-    </form>
+        <form [formGroup]="formPrimero" class="inputs">
+            <span class="inputTitle">Sorteo 1</span>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Desde</mat-label>
+                <input formControlName="desdeParticipante" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Hasta</mat-label>
+                <input formControlName="hastaParticipante" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Cantidad de Premios</mat-label>
+                <input formControlName="cantidad" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Premio</mat-label>
+                <input formControlName="premio" matInput type="text">
+            </mat-form-field>
+        </form>
+        <form [formGroup]="formSegundo" class="inputs" style="margin-left: 3em;">
+            <span class="inputTitle">Sorteo 2</span>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Desde</mat-label>
+                <input formControlName="desdeParticipante" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Hasta</mat-label>
+                <input formControlName="hastaParticipante" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Cantidad de Premios</mat-label>
+                <input formControlName="cantidad" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Premio</mat-label>
+                <input formControlName="premio" matInput type="text">
+            </mat-form-field>
+        </form>
     </div>
 
-    <button mat-fab class="okBtn startSorteoBtn" [disabled]="invalidForms()" (click)="startSorteo()">
+    <button mat-fab class="startSorteoBtn" [ngClass]="{'okBtn': !invalidForms()}" [disabled]="invalidForms()" (click)="startSorteo()">
         <mat-icon>done</mat-icon>
     </button>
 </div>

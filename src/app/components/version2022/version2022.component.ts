@@ -4,7 +4,7 @@ import { SlotsSorteo2022Component } from './slots-sorteo2022/slots-sorteo2022.co
 @Component({
   selector: 'app-version2022',
   templateUrl: './version2022.component.html',
-  styleUrls: ['./version2022.component.css']
+  styleUrls: ['./version2022.component.scss']
 })
 export class Version2022Component implements OnInit {
 

@@ -6,7 +6,7 @@ import { Version2022Component } from './components/version2022/version2022.compo
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 

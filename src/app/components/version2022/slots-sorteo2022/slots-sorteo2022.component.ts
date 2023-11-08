@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-slots-sorteo2022',
   templateUrl: './slots-sorteo2022.component.html',
-  styleUrls: ['./slots-sorteo2022.component.css']
+  styleUrls: ['./slots-sorteo2022.component.scss']
 })
 export class SlotsSorteo2022Component implements OnInit {
 
@@ -125,6 +125,15 @@ export class SlotsSorteo2022Component implements OnInit {
         this.winner = null;
         this.sorteando = false;
         this.primerSorteo = true;
+    }
+
+    // OTROS
+    disableShuffleBtn(){
+        return this.status.finish || this.sorteandoNoBtns
+    }
+
+    disableOkBtn(){
+        return this.status.finish || this.sorteandoNoBtns || this.winner === null
     }
 
 }

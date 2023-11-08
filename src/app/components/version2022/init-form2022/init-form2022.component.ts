@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-init-form2022',
   templateUrl: './init-form2022.component.html',
-  styleUrls: ['./init-form2022.component.css']
+  styleUrls: ['./init-form2022.component.scss']
 })
 export class InitForm2022Component implements OnInit {
 

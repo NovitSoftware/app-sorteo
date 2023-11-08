@@ -1,0 +1,58 @@
+@import "app-colors.scss";
+
+#sorteoContainer {
+    height: -webkit-fill-available;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: inherit;
+
+    .finDeSorteo h1 {
+        font-size: 58px;
+        color: $color-primary-blue;
+    }
+
+    #buttons {
+        display: flex;
+        margin: 1.5em;
+        align-items: center;
+
+        .okBtn{
+            background-color: $color-exito;
+        }
+        .shuffleBtn {
+            background-color: $color-primary-blue;
+        }
+
+        #randomGenerator {
+            margin-left: 3em;
+            margin-right: 3em;
+            height: 100px;
+            overflow: hidden;
+
+            .cifra{
+                font-size: 80px;
+                height: 110px;
+                width: 110px;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+            }
+
+            .cifra span.clearBlue {
+                color: $color-secondary-blue;
+            }
+
+            .cifra span.darkBlue {
+                color: $color-primary-blue;
+            }
+
+        }
+    }
+
+}
+
+.fullWidth {
+    width: -webkit-fill-available;
+}
