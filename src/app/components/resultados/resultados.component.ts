@@ -7,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ResultadosComponent implements OnInit {
 
-    @Input() results!: {numero: number, premio: string}[];
+    @Input() results!: {texto: number|string, premio: string}[];
+    @Input() columnaDerecha!: string;
 
     constructor() { }
 

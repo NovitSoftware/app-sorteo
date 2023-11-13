@@ -1,5 +1,5 @@
 <div id="headBar">
-    <h1 class="sorteo" (click)="resetearSorteo()" [ngClass]="{'clickable': status.finish }">Sorteo 2022</h1>
+    <h1 class="sorteo" (click)="resetearSorteo()" [ngClass]="{'clickable': status.finish }">Sorteo {{getVersion()}}</h1>
     <div style="display: flex; align-items: center;">
         <div id="iconGroup">
             <mat-icon class="svgIcon" svgIcon="consultatioBlanco"></mat-icon>

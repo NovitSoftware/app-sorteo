@@ -1,0 +1,114 @@
+@import "app-colors.scss";
+
+#cargaListadosContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: -webkit-fill-available;
+    margin-top: 2em;
+
+    #listadosContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        width: 50%;
+
+        .headerContainer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .rightHeaderSection {
+                display: flex;
+                align-items: flex-start;
+                gap: 1em;
+            }
+        }
+    }
+
+    #premiosContainer {
+        .listadoContainer {
+            width: 50%;
+        }
+    }
+
+    #participantesContainer {
+        .listadoContainer {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            row-gap: 1em;
+            max-height: 250px;
+            overflow: auto;
+        }
+    }
+
+    h1 {
+        margin-bottom: 10px;
+    }
+
+    span {
+        color: $color-primary-blue;
+    }
+    
+    .listadoContainer {
+        .cabeceraTabla > span {
+            font-size: 21px;
+            font-family: "LatinxText-Bold";
+            text-decoration: underline;
+        }
+        .cuerpoTabla > span {
+            font-size: 34px;
+        }
+
+        .filaTabla {
+            margin-top: 0.5em;
+            > span {
+               font-size: 18px;
+           }
+        }
+
+        .cabeceraTabla,
+        .filaTabla {
+            display: flex;
+            justify-content: space-between;
+        }
+    
+    }
+
+    #actionsContainer {
+        display: flex;
+        justify-content: center;
+        margin-top: 2em;
+
+        button {
+            font-size: 20px;
+            padding: 5px 3em;
+        }
+    }
+}
+
+:host ::ng-deep #cargaListadosContainer {
+    .rightHeaderSection {
+        mat-icon {
+            color: $color-secondary-blue;
+        }
+    }
+}
+
+//*
+// BARRA SCROLL
+// 
+.listadoScroleable::-webkit-scrollbar {
+    width: 7px;
+    height: 8px;
+}
+
+.listadoScroleable::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 20px $color-gray;
+    border-radius: 7px;
+}
+
+.listadoScroleable::-webkit-scrollbar-thumb {
+    background: $color-secondary-blue;
+    border-radius: 10px;
+}

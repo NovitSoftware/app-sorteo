@@ -1,0 +1,2 @@
+YATE,2
+MONOPATÍN,3

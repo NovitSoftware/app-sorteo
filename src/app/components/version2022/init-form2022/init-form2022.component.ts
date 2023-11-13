@@ -32,7 +32,13 @@ export class InitForm2022Component implements OnInit {
     }
 
     invalidForms(){
-        return this.formPrimero.invalid || this.formSegundo.invalid;
+        let primero = this.formPrimero.getRawValue();
+        let segundo = this.formSegundo.getRawValue();
+
+        let invalidPrimero = this.formPrimero.invalid || primero.desdeParticipante > primero.hastaParticipante || primero.cantidad <= 0 || (primero.hastaParticipante - primero.desdeParticipante) < primero.cantidad-1  || primero.premio === "" ;
+        let invalidSegundo = this.formSegundo.invalid || segundo.desdeParticipante > segundo.hastaParticipante || segundo.cantidad <= 0 || (segundo.hastaParticipante - segundo.desdeParticipante) < segundo.cantidad-1 || segundo.premio === "" ;
+
+        return invalidPrimero || invalidSegundo;
     }
 
     startSorteo(){

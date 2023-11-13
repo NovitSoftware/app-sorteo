@@ -1,0 +1,2 @@
+<app-carga-listado class="fullWidth" [ngClass]="{'hidden': status.start}" (fireStartSorteo)="startSorteo($event)"></app-carga-listado>
+<app-slots-sorteo2023 #slotsSorteo [ngClass]="{'hidden': !status.start}" [status]="status" style="width: 50%;"></app-slots-sorteo2023>

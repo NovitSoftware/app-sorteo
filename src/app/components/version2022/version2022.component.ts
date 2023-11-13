@@ -9,6 +9,7 @@ import { SlotsSorteo2022Component } from './slots-sorteo2022/slots-sorteo2022.co
 export class Version2022Component implements OnInit {
 
     @Input() status!: {start: boolean, finish: boolean};
+    
 
     @ViewChild('slotsSorteo') slotsSorteo!: SlotsSorteo2022Component;
     

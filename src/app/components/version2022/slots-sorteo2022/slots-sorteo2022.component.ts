@@ -31,7 +31,7 @@ export class SlotsSorteo2022Component implements OnInit {
 
     generateWinner(){
         this.winner = {
-            numero: _.shuffle(this.participantes)[0],
+            texto: _.shuffle(this.participantes)[0],
             premio: this.primerSorteo ? this.forms.formPrimero.getRawValue().premio : this.forms.formSegundo.getRawValue().premio
         }
         
@@ -41,7 +41,7 @@ export class SlotsSorteo2022Component implements OnInit {
     }
 
     getCifrasGanadoras(){
-        this.winnerString = this.winner.numero.toString();
+        this.winnerString = this.winner.texto.toString();
         let letters = this.winnerString.split("");
         this.showWinnerNumber = [];
         letters.forEach(x => {

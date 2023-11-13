@@ -1,10 +1,10 @@
-<div id="resultados">
+<div id="resultados" [ngClass]="{'noMargin': columnaDerecha==='Participante'}">
     <div class="resultadoContainer cabeceraTabla">
         <span>Premio</span>
-        <span>Número</span>
+        <span>{{columnaDerecha}}</span>
     </div>
     <div class="resultadoContainer itemsTabla" *ngFor="let result of results">
         <span>{{result.premio}}</span>
-        <div>{{result.numero}}</div>
+        <div>{{result.texto}}</div>
     </div>
 </div>

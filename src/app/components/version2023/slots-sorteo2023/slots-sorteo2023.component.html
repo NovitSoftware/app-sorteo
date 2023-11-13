@@ -1,0 +1,25 @@
+<div id="sorteoContainer" class="fullWidth">
+
+    <div *ngIf="status.finish" class="finDeSorteo">
+        <h1>¡Sorteo finalizado!</h1>
+    </div>
+
+    <div *ngIf="!status.finish" id="buttons" class="fullWidth">
+
+        <div id="leftContainer">
+            <button mat-fab [ngClass]="{'shuffleBtn': !disableShuffleBtn()}" [disabled]="disableShuffleBtn()" (click)="generateWinner()">
+                <mat-icon>shuffle</mat-icon>
+            </button>
+            <button mat-fab [ngClass]="{'okBtn': !disableOkBtn()}" (click)="saveResult()" [disabled]="disableOkBtn()">
+                <mat-icon>done</mat-icon>
+            </button>
+        </div>
+
+        <div id="randomGeneratorStrings">
+            <span [ngClass]="{'darkBlue': !sorteando, 'clearBlue': sorteando}">{{showParticipante}}</span>
+        </div>
+
+    </div>
+
+    <app-resultados [results]="results" columnaDerecha="Participante" class="fullWidth"></app-resultados>
+</div>
