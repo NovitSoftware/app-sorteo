@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-slots-sorteo2023',
@@ -9,43 +10,47 @@ export class SlotsSorteo2023Component implements OnInit {
 
     @Input() status!: {start: boolean, finish: boolean};
 
-    participantes: any[] = [];
-    premios: any[] = [];
-
+    sorteos!: Sorteos;
+    empresaSorteando: "consultatio"|"nordelta"|"asset" = "consultatio"
+    indexPremio: number = 0;
+        
+    // RESULTADOS SORTEO
+    sorteando: boolean = false;
     showParticipante: string = "- - - -";
     winnerIndex: number = 0;
     winner: any|null = null;
     results: any[] = [];
 
-    sorteando: boolean = false;
-    indexPremio: number = 0;
-
-    intervalSpin: any;
-    intervalNum: number = 100;
-    intervalNum_step: number = 50;
-    intervalNum_lastStep: number = 100;
-    intervalInstance: number = 1;
-    intervalRepeat: number = 30;
-    intervalRepeat_step: number = 10;
-    intervalRepeat_lastStep: number = 2;
+    // CONFIGURACION DE "RULETA"
+    config: ConfiguracionRuleta = new ConfiguracionRuleta();
+    
+    // 
+    TESTEANDO_RULETA: boolean = false;
+    TESTEO_CONFIG = new FormGroup(
+        {
+            microSeg: new FormControl('100', [Validators.required]),
+            microSeg_agregar: new FormControl('50', [Validators.required]),
+            microSeg_suspenso: new FormControl('100', [Validators.required]),
+            repetir_N_veces: new FormControl('18', [Validators.required]),
+            restarRepeticiones: new FormControl('6', [Validators.required]),
+            restarRepeticiones_suspenso: new FormControl('2', [Validators.required]),
+        }
+    )
 
     constructor() { }
 
     ngOnInit(): void {
     }
 
-    startSorteo(data: any){
-        this.participantes = data.participantes;
-        data.premios.forEach((premio: any) => {
-            for(let i=0; i<premio.cantidad; i++){
-                this.premios.push(premio.nombre)
-            }
-        })
+    startSorteo(data: Sorteos){
+        this.sorteos = data;
         this.setDefaultIntervalValues();
+        this.status.start = true;
     }
 
     disableShuffleBtn(){
-        return this.sorteando || this.winner !== null
+        // return this.sorteando || this.winner !== null
+        return this.sorteando
     }
 
     disableOkBtn(){
@@ -53,11 +58,21 @@ export class SlotsSorteo2023Component implements OnInit {
     }
 
     setDefaultIntervalValues() {
-        this.intervalNum = 100;
-        this.intervalNum_step = 50;
-        this.intervalRepeat = 30;
-        this.intervalRepeat_step = 10;
-        this.intervalInstance = 1;
+        this.config = new ConfiguracionRuleta();
+        this.configureTestInterval();
+    }
+
+    configureTestInterval(){
+        if (this.TESTEANDO_RULETA){
+            let test = this.TESTEO_CONFIG.getRawValue();
+            console.log(test)
+            this.config.microSeg = parseInt(test.microSeg);
+            this.config.microSeg_agregar = parseInt(test.microSeg_agregar);
+            this.config.microSeg_suspenso = parseInt(test.microSeg_suspenso);
+            this.config.repetir_N_veces = parseInt(test.repetir_N_veces);
+            this.config.restarRepeticiones = parseInt(test.restarRepeticiones);
+            this.config.restarRepeticiones_suspenso = parseInt(test.restarRepeticiones_suspenso);
+        }
     }
 
     generateWinner(){
@@ -67,51 +82,72 @@ export class SlotsSorteo2023Component implements OnInit {
     }
 
     generateInterval(){
-        this.intervalSpin = setInterval(() => {
+        this.config.intervalSpin = setInterval(() => {
+            let participantes = this.sorteos[this.empresaSorteando].participantes;
 
-            this.winnerIndex = Math.floor((Math.random()*this.participantes.length));
-            this.showParticipante = this.participantes[this.winnerIndex];
-            this.intervalInstance++;
+            // para evitar que se repita el index;
+            let posibleWinnerIndex = Math.floor((Math.random()*participantes.length));
+            while (this.winnerIndex === posibleWinnerIndex) {
+                posibleWinnerIndex = Math.floor((Math.random()*participantes.length));
+            }
 
-            if (this.intervalInstance === this.intervalRepeat) {
-                this.intervalInstance = 1;
-                this.intervalNum += this.intervalNum_step;
-                this.intervalRepeat -= this.intervalRepeat_step;
-                if (this.intervalRepeat === this.intervalRepeat_step) {
-                    this.intervalRepeat_step = this.intervalRepeat_lastStep;
-                    this.intervalNum_step = this.intervalNum_lastStep;
+            this.winnerIndex = posibleWinnerIndex;
+            this.showParticipante = participantes[this.winnerIndex];
+            this.config.intervalInstance++;
+
+            if (this.config.intervalInstance === this.config.repetir_N_veces) {
+                this.config.intervalInstance = 1;
+                this.config.microSeg += this.config.microSeg_agregar;
+                this.config.repetir_N_veces -= this.config.restarRepeticiones;
+                if (this.config.repetir_N_veces === this.config.restarRepeticiones) {
+                    this.config.restarRepeticiones = this.config.restarRepeticiones_suspenso;
+                    this.config.microSeg_agregar = this.config.microSeg_suspenso;
                 }
-                clearInterval(this.intervalSpin);
+                clearInterval(this.config.intervalSpin);
 
-                if (this.intervalRepeat !== 0) this.generateInterval();
+                if (this.config.repetir_N_veces !== 0) this.generateInterval();
                 else this.setWinner();
             }
 
-        }, this.intervalNum)
+        }, this.config.microSeg)
     }
 
     setWinner(){
-        
         this.winner = {
             texto: this.showParticipante,
-            premio: this.premios[this.indexPremio]
+            premio: this.sorteos[this.empresaSorteando].premios[this.indexPremio]
         }
         
         setTimeout(() => {
             this.sorteando = false;
         }, 1000)
-
-        this.indexPremio++;
     }
     
     saveResult(){
         this.results.push(this.winner);
-        this.participantes.splice(this.winnerIndex, 1); 
+        this.sorteos[this.empresaSorteando].participantes.splice(this.winnerIndex, 1); 
         
         this.showParticipante = "- - - -";
         this.winner = null;
+        this.indexPremio++;
 
-        if (this.indexPremio === this.premios.length) this.status.finish = true;
+        this.checkNextSorteo();
+    }
+    
+    checkNextSorteo(){
+        
+        if (this.indexPremio === this.sorteos[this.empresaSorteando].premios.length) {
+            if (this.empresaSorteando === "asset") {
+                this.status.finish = true;
+                return
+            }
+
+            if (this.empresaSorteando === "consultatio") this.empresaSorteando = "nordelta";
+            else if (this.empresaSorteando === "nordelta") this.empresaSorteando = "asset";
+            
+            this.indexPremio = 0;
+        }
+
     }
 
     resetearSorteo(){
@@ -122,4 +158,31 @@ export class SlotsSorteo2023Component implements OnInit {
         this.indexPremio = 0;
     }
 
+}
+
+export interface Sorteos {
+    consultatio: Sorteo,
+    nordelta: Sorteo,
+    asset: Sorteo
+}
+
+export interface Sorteo {
+    participantes: string[],
+    premios: string[]
+}
+
+export interface Premio {
+    nombre: string;
+    cantidad: number;
+}
+
+export class ConfiguracionRuleta {
+    intervalSpin: any;
+    microSeg: number = 100;
+    microSeg_agregar: number = 50;
+    microSeg_suspenso: number = 100;
+    intervalInstance: number = 1;
+    repetir_N_veces: number = 18;
+    restarRepeticiones: number = 6;
+    restarRepeticiones_suspenso: number = 2;
 }

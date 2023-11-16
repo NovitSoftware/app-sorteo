@@ -37,6 +37,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .finDeSorteo h1 {
         font-size: 58px;
         color: $color-primary-blue;
+        margin-bottom: 10px;
     }
 
     #buttons {
@@ -80,7 +81,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         
         #leftContainer {
             display: flex; 
-            flex-direction: column; 
+            // flex-direction: column; 
             justify-content: center; 
             gap: 2em;
         }

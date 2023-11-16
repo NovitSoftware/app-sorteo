@@ -21,5 +21,38 @@
 
     </div>
 
-    <app-resultados [results]="results" columnaDerecha="Participante" class="fullWidth"></app-resultados>
+    <div *ngIf="TESTEANDO_RULETA">
+        <span class="inputTitle">Configuración de Ruleta</span>
+        <form [formGroup]="TESTEO_CONFIG" class="inputs" style="width: 450px; display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Micro segundos inicial</mat-label>
+                <input formControlName="microSeg" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Sumar micro segundos</mat-label>
+                <input formControlName="microSeg_agregar" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Sumar micro seg suspenso</mat-label>
+                <input formControlName="microSeg_suspenso" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Repeticiones</mat-label>
+                <input formControlName="repetir_N_veces" matInput type="number">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Restar repeticiones</mat-label>
+                <input formControlName="restarRepeticiones" matInput type="text">
+            </mat-form-field>
+            <mat-form-field class="inputNumero" appearance="fill">
+                <mat-label>Restar repeticiones suspenso</mat-label>
+                <input formControlName="restarRepeticiones_suspenso" matInput type="text">
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div class="fullWidth" style="display: flex; gap: 5em;">
+        <app-resultados [results]="results.slice(0, 10)" columnaDerecha="Participante" class="fullWidth"></app-resultados>
+        <app-resultados *ngIf="results.length > 10" [results]="results.slice(10)" columnaDerecha="Participante" class="fullWidth"></app-resultados>
+    </div>
 </div>

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AvisoSnackComponent } from '../../aviso-snack/aviso-snack.component';
 import { AvisoSnackService } from '../../aviso-snack/aviso-snack.service';
+import { Premio } from '../slots-sorteo2023/slots-sorteo2023.component';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-carga-listado',
@@ -78,12 +78,13 @@ export class CargaListadoComponent implements OnInit {
         this.premios = premios;
     }
 
-    comenzarSorteo(){
-        this.fireStartSorteo.emit({participantes: this.participantes, premios: this.premios})
+    isInvalid(){
+        return !this.participantes.length || !this.premios.length
     }
-}
 
-export interface Premio {
-    nombre: string;
-    cantidad: number;
+    getListados(){
+        let premios: string[] = [];
+        _.forEach(this.premios, x => { premios = [...premios, ...Array(x.cantidad).fill(x.nombre)]})
+        return {participantes: this.participantes, premios: premios}
+    }
 }

@@ -1,17 +1,16 @@
 @import "app-colors.scss";
 
 #cargaListadosContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: -webkit-fill-available;
-    margin-top: 2em;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // width: -webkit-fill-available;
 
     #listadosContainer {
         display: flex;
         flex-direction: column;
         gap: 1em;
-        width: 50%;
+        // width: 50%;
 
         .headerContainer {
             display: flex;
@@ -52,9 +51,9 @@
     
     .listadoContainer {
         .cabeceraTabla > span {
-            font-size: 21px;
+            font-size: 16px;
             font-family: "LatinxText-Bold";
-            text-decoration: underline;
+            color: $color-secondary-blue;
         }
         .cuerpoTabla > span {
             font-size: 34px;
@@ -73,17 +72,6 @@
             justify-content: space-between;
         }
     
-    }
-
-    #actionsContainer {
-        display: flex;
-        justify-content: center;
-        margin-top: 2em;
-
-        button {
-            font-size: 20px;
-            padding: 5px 3em;
-        }
     }
 }
 

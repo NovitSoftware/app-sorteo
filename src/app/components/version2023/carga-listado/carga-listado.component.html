@@ -5,7 +5,7 @@
     <div id="listadosContainer">
         <div id="participantesContainer">
             <div class="headerContainer">
-                <h1>PARTICIPANTES</h1>
+                <h3 style="text-decoration: underline;">PARTICIPANTES</h3>
                 <div class="rightHeaderSection">
                     <button mat-raised-button class="primaryBtn" (click)="inputParticipantes.click()">Cargar</button>
                     <mat-icon #tooltip="matTooltip" matTooltip="El archvio .txt debe tener un participante por línea" matTooltipPosition="right">info</mat-icon>
@@ -21,7 +21,7 @@
 
         <div id="premiosContainer">
             <div class="headerContainer">
-                <h1>PREMIOS</h1>
+                <h3 style="text-decoration: underline;">PREMIOS</h3>
                 <div class="rightHeaderSection">
                     <button mat-raised-button class="primaryBtn" (click)="inputPremios.click()">Cargar</button>
                     <mat-icon matTooltip='El archvio .txt debe tener un premio por línea (nombre y cantidad separados por una coma - ej: "Monopatín,3" )' matTooltipPosition="right">info</mat-icon>
@@ -42,10 +42,6 @@
                     </ng-container>
                 </div>
             </div>
-        </div>
-
-        <div id="actionsContainer">
-            <button mat-raised-button class="okBtn" [disabled]="!participantes.length || !premios.length" (click)="comenzarSorteo()">COMENZAR SORTEO</button>
         </div>
     </div>
 </div>

@@ -1,2 +1,24 @@
-<app-carga-listado class="fullWidth" [ngClass]="{'hidden': status.start}" (fireStartSorteo)="startSorteo($event)"></app-carga-listado>
-<app-slots-sorteo2023 #slotsSorteo [ngClass]="{'hidden': !status.start}" [status]="status" style="width: 50%;"></app-slots-sorteo2023>
+<div id="initContainer" [ngClass]="{'hidden': status.start}">
+    <div id="empresasContainer">
+        <div class="sorteoContainer">
+            <h1>CONSULTATIO</h1>
+            <app-carga-listado #listadosConsultatio class="fullWidth"></app-carga-listado>
+        </div>
+        <div class="sorteoSeparator"></div>
+        <div class="sorteoContainer">
+            <h1>NORDELTA</h1>
+            <app-carga-listado #listadosNordelta class="fullWidth"></app-carga-listado>
+        </div>
+        <div class="sorteoSeparator"></div>
+        <div class="sorteoContainer">
+            <h1>ASSET</h1>
+            <app-carga-listado #listadosAsset class="fullWidth"></app-carga-listado>
+        </div>
+    </div>
+    
+    <div id="actionsContainer" [ngClass]="{'hidden': status.start}">
+        <button mat-raised-button class="okBtn" [disabled]="disableStart()" (click)="comenzarSorteo()">COMENZAR SORTEO</button>
+    </div>
+</div>
+
+<app-slots-sorteo2023 #slotsSorteo [ngClass]="{'hidden': !status.start}" [status]="status" style="width: 60%;"></app-slots-sorteo2023>

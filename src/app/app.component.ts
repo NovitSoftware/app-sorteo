@@ -12,7 +12,7 @@ import { HeadBarComponent } from './components/head-bar/head-bar.component';
 })
 export class AppComponent {
 
-    showVersionControl: boolean = true;
+    showVersionControl: boolean = false;
     displayVersion: Version = Version._2023;
     version = Version;
 
