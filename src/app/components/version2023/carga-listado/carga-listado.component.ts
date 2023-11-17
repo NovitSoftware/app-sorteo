@@ -12,6 +12,7 @@ export class CargaListadoComponent implements OnInit {
 
     participantes: string[] = [];
     premios: Premio[] = [];
+    cantidadTotalPremios: number = 0;
 
     @Output() fireStartSorteo = new EventEmitter();
 
@@ -49,37 +50,56 @@ export class CargaListadoComponent implements OnInit {
     }
 
     cargarParticipantes(output: any){
-        this.participantes = output;
+        let lowerCase = _.map(output, x => x.toLowerCase());
+        this.participantes = output.filter((value: string, index: number) => {
+            return lowerCase.indexOf(value.toLowerCase()) === index
+        });;
     }
 
     cargarPremios(output: any){
         let premios: any[] = [];
-        let error: boolean = false;
+        let error: string = "";
 
         output.forEach((x: string) => {
             if (!error){
                 let pair = x.split(",");
-                if (pair.length === 2){
-                    try {
-                        let nombre = pair[0].trim();
-                        let cantidad = parseInt(pair[1].trim())
-                        premios.push({nombre: nombre, cantidad: cantidad})
-                    } catch {
-                        this._avisoSnackService.displayMsg("error", "ERROR", "Formato de archivo incorrecto");
-                        premios = [];
-                        error = true;
-                    }
+                
+                error = this.validarPremios(pair);
+
+                if (error !== ""){
+                    this._avisoSnackService.displayMsg("error", "FORMATO INCORRECTO", error);
+                    premios = [];
                 } else {
-                    this._avisoSnackService.displayMsg("error", "ERROR", "Formato de archivo incorrecto");
-                    error = true;
+                    let nombre = pair[0].trim();
+                    let cantidad = parseInt(pair[1].trim())
+                    premios.push({nombre: nombre, cantidad: cantidad})
+                    this.cantidadTotalPremios += cantidad;
                 }
             }
         })
         this.premios = premios;
     }
 
+    validarPremios(pair: string[]): string {
+        if (pair.length !== 2) return `El formato de texto de premio debe ser: "premio,cantidad"`
+
+        try {
+            let cantidad = parseInt(pair[1].trim());
+            if (isNaN(cantidad)) return `No se ingresó un número para indicar la cantidad de premios`
+            if (cantidad === 0) return `Un premio tiene cantidad cero`
+        } catch {
+            return `No se ingresó un número para indicar la cantidad de premios`
+        }
+
+        return ""
+    }
+
+    masPremiosQueParticipantes() {
+        return (this.participantes.length > 0 && this.premios.length > 0) && this.participantes.length < this.cantidadTotalPremios
+    }
+
     isInvalid(){
-        return !this.participantes.length || !this.premios.length
+        return !this.participantes.length || !this.premios.length || this.masPremiosQueParticipantes()
     }
 
     getListados(){

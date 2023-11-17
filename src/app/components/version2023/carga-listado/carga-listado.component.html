@@ -28,6 +28,8 @@
                 </div>
             </div>
 
+            <span *ngIf="masPremiosQueParticipantes()" class="alert">La cantidad de premios es superior a la de participantes</span>
+
             <div *ngIf="premios.length" class="listadoContainer">
                 <div class="cabeceraTabla">
                     <span>Nombre</span>
