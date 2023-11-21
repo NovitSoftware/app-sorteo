@@ -156,6 +156,7 @@ export class SlotsSorteo2023Component implements OnInit {
         this.sorteando = false;
         this.setDefaultIntervalValues();
         this.indexPremio = 0;
+        this.empresaSorteando = "consultatio";
     }
 
 }

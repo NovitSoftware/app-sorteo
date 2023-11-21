@@ -23,6 +23,9 @@ export class Version2023Component implements OnInit {
     }
 
     resetearSorteo(){
+        this.listadosConsultatio.resetearSorteo();
+        this.listadosNordelta.resetearSorteo();
+        this.listadosAsset.resetearSorteo();
         this.slotsSorteo.resetearSorteo();
     }
 

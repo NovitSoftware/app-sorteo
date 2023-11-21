@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 })
 export class CargaListadoComponent implements OnInit {
 
+    participantesOriginal: string[] = [];
     participantes: string[] = [];
     premios: Premio[] = [];
     cantidadTotalPremios: number = 0;
@@ -22,6 +23,10 @@ export class CargaListadoComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+    }
+    
+    resetearSorteo(){
+        this.participantes = [...this.participantesOriginal];
     }
 
     cargarArchivo(event: any, tipo: 'participantes'|'premios'){
@@ -52,9 +57,10 @@ export class CargaListadoComponent implements OnInit {
 
     cargarParticipantes(output: any){
         let lowerCase = _.map(output, x => x.toLowerCase());
-        this.participantes = output.filter((value: string, index: number) => {
+        this.participantesOriginal = output.filter((value: string, index: number) => {
             return lowerCase.indexOf(value.toLowerCase()) === index
         });;
+        this.participantes = [...this.participantesOriginal];
     }
 
     cargarPremios(output: any){
