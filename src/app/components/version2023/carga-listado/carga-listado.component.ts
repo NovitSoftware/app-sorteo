@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AvisoSnackService } from '../../aviso-snack/aviso-snack.service';
 import { Premio } from '../slots-sorteo2023/slots-sorteo2023.component';
 import * as _ from 'lodash';
@@ -17,7 +17,8 @@ export class CargaListadoComponent implements OnInit {
     @Output() fireStartSorteo = new EventEmitter();
 
     constructor(
-        private _avisoSnackService: AvisoSnackService
+        private _avisoSnackService: AvisoSnackService,
+        private cdr: ChangeDetectorRef
     ) { }
 
     ngOnInit(): void {
@@ -59,6 +60,7 @@ export class CargaListadoComponent implements OnInit {
     cargarPremios(output: any){
         let premios: any[] = [];
         let error: string = "";
+        this.cantidadTotalPremios = 0;
 
         output.forEach((x: string) => {
             if (!error){
@@ -78,6 +80,7 @@ export class CargaListadoComponent implements OnInit {
             }
         })
         this.premios = premios;
+        this.cdr.detectChanges();
     }
 
     validarPremios(pair: string[]): string {
@@ -95,7 +98,7 @@ export class CargaListadoComponent implements OnInit {
     }
 
     masPremiosQueParticipantes() {
-        return (this.participantes.length > 0 && this.premios.length > 0) && this.participantes.length < this.cantidadTotalPremios
+        return (this.participantes.length > 0 && this.cantidadTotalPremios > 0) && this.participantes.length < this.cantidadTotalPremios
     }
 
     isInvalid(){
