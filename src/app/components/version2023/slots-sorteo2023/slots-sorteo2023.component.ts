@@ -11,7 +11,7 @@ export class SlotsSorteo2023Component implements OnInit {
     @Input() status!: {start: boolean, finish: boolean};
 
     sorteos!: Sorteos;
-    empresaSorteando: "consultatio"|"nordelta"|"asset" = "consultatio"
+    empresaSorteando: "consultatio"|"nordelta"|"asset" = "consultatio";
     indexPremio: number = 0;
         
     // RESULTADOS SORTEO
@@ -35,7 +35,7 @@ export class SlotsSorteo2023Component implements OnInit {
             restarRepeticiones: new FormControl('6', [Validators.required]),
             restarRepeticiones_suspenso: new FormControl('2', [Validators.required]),
         }
-    )
+    );
 
     constructor() { }
 
@@ -65,7 +65,6 @@ export class SlotsSorteo2023Component implements OnInit {
     configureTestInterval(){
         if (this.TESTEANDO_RULETA){
             let test = this.TESTEO_CONFIG.getRawValue();
-            console.log(test)
             this.config.microSeg = parseInt(test.microSeg);
             this.config.microSeg_agregar = parseInt(test.microSeg_agregar);
             this.config.microSeg_suspenso = parseInt(test.microSeg_suspenso);
