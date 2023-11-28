@@ -4,7 +4,7 @@
         <h1>¡Sorteo finalizado!</h1>
     </div>
 
-    <div *ngIf="!status.finish" id="buttons" class="fullWidth">
+    <div *ngIf="!status.finish" id="buttons">
 
         <div id="leftContainer">
             <button mat-fab [ngClass]="{'shuffleBtn': !disableShuffleBtn()}" [disabled]="disableShuffleBtn()" (click)="generateWinner()">
@@ -51,7 +51,7 @@
         </form>
     </div>
 
-    <div class="fullWidth" style="display: flex; gap: 5em;">
+    <div id="tablaResultadosContainer" [ngClass]="{'oneColumn': results.length <= 10, 'twoColumns': results.length > 10}">
         <app-resultados [results]="results.slice(0, 10)" columnaDerecha="Participante" class="fullWidth"></app-resultados>
         <app-resultados *ngIf="results.length > 10" [results]="results.slice(10)" columnaDerecha="Participante" class="fullWidth"></app-resultados>
     </div>

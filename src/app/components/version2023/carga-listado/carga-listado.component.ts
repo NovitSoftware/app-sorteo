@@ -58,8 +58,8 @@ export class CargaListadoComponent implements OnInit {
     cargarParticipantes(output: any){
         let lowerCase = _.map(output, x => x.toLowerCase());
         this.participantesOriginal = output.filter((value: string, index: number) => {
-            return lowerCase.indexOf(value.toLowerCase()) === index
-        });;
+            return lowerCase.indexOf(value.toLowerCase()) === index && value.trim() !== "";
+        });
         this.participantes = [...this.participantesOriginal];
     }
 

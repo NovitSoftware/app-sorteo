@@ -3,5 +3,22 @@
 }
 
 #sorteoContainer #buttons {
+    width: 60%;
     margin-top: 39px;
+    margin-bottom: 0px;
+    padding-bottom: 2.5em;
+}
+
+.oneColumn {
+    width: 50%;
+}
+
+.twoColumns {
+    width: 84%;
+}
+
+#tablaResultadosContainer {
+    border-top: 1px solid #f3f3f3;
+    padding-top: 2em;
+    display: flex; gap: 9em;
 }

@@ -29,3 +29,9 @@
 #resultados.noMargin {
     margin: 0px;
 }
+
+#resultados.version2023 {
+    .resultadoContainer.cabeceraTabla {
+        border-top-width: 0px;
+    }
+}
