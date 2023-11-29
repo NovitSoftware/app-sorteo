@@ -28,12 +28,12 @@ export class SlotsSorteo2023Component implements OnInit {
     TESTEANDO_RULETA: boolean = false;
     TESTEO_CONFIG = new FormGroup(
         {
-            microSeg: new FormControl('100', [Validators.required]),
+            microSeg: new FormControl('50', [Validators.required]),
             microSeg_agregar: new FormControl('50', [Validators.required]),
-            microSeg_suspenso: new FormControl('100', [Validators.required]),
-            repetir_N_veces: new FormControl('18', [Validators.required]),
-            restarRepeticiones: new FormControl('6', [Validators.required]),
-            restarRepeticiones_suspenso: new FormControl('2', [Validators.required]),
+            microSeg_suspenso: new FormControl('85', [Validators.required]),
+            repetir_N_veces: new FormControl('27', [Validators.required]),
+            restarRepeticiones: new FormControl('9', [Validators.required]),
+            restarRepeticiones_suspenso: new FormControl('3', [Validators.required]),
         }
     );
 
@@ -178,11 +178,19 @@ export interface Premio {
 
 export class ConfiguracionRuleta {
     intervalSpin: any;
-    microSeg: number = 100;
+    microSeg: number = 50;
     microSeg_agregar: number = 50;
-    microSeg_suspenso: number = 100;
+    microSeg_suspenso: number = 85;
     intervalInstance: number = 1;
-    repetir_N_veces: number = 18;
-    restarRepeticiones: number = 6;
-    restarRepeticiones_suspenso: number = 2;
+    repetir_N_veces: number = 27;
+    restarRepeticiones: number = 9;
+    restarRepeticiones_suspenso: number = 3;
 }
+
+// 1ra iteración:
+// microSeg: number = 100;
+// microSeg_agregar: number = 50;
+// microSeg_suspenso: number = 100;
+// repetir_N_veces: number = 18;
+// restarRepeticiones: number = 6;
+// restarRepeticiones_suspenso: number = 2;
