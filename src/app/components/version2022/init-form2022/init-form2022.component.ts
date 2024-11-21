@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-init-form2022',
@@ -10,8 +10,8 @@ export class InitForm2022Component implements OnInit {
 
     @Input() start: boolean = false;
     
-    formPrimero: FormGroup = this.createForm();
-    formSegundo: FormGroup = this.createForm();
+    formPrimero: UntypedFormGroup = this.createForm();
+    formSegundo: UntypedFormGroup = this.createForm();
   
     @Output() fireStartSorteo = new EventEmitter();
 
@@ -21,12 +21,12 @@ export class InitForm2022Component implements OnInit {
     }
 
     createForm(){
-        return new FormGroup(
+        return new UntypedFormGroup(
             {
-                desdeParticipante: new FormControl('', [Validators.required]),
-                hastaParticipante: new FormControl('', [Validators.required]),
-                cantidad: new FormControl('', [Validators.required]),
-                premio: new FormControl('', [Validators.required]),
+                desdeParticipante: new UntypedFormControl('', [Validators.required]),
+                hastaParticipante: new UntypedFormControl('', [Validators.required]),
+                cantidad: new UntypedFormControl('', [Validators.required]),
+                premio: new UntypedFormControl('', [Validators.required]),
             }
         )
     }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import * as _ from 'lodash';
 
 @Component({
@@ -11,7 +11,7 @@ export class SlotsSorteo2022Component implements OnInit {
 
     @Input() status!: {start: boolean, finish: boolean};
 
-    forms!: {formPrimero: FormGroup, formSegundo: FormGroup};
+    forms!: {formPrimero: UntypedFormGroup, formSegundo: UntypedFormGroup};
     participantes: number[] = [];
     cantidadCifras: string[] = []; 
     
@@ -80,7 +80,7 @@ export class SlotsSorteo2022Component implements OnInit {
         }, 100)
     }
 
-    startSorteo(forms: {formPrimero: FormGroup, formSegundo: FormGroup}){
+    startSorteo(forms: {formPrimero: UntypedFormGroup, formSegundo: UntypedFormGroup}){
         this.forms = forms;
         this.startPrimerSorteo();
         this.status.start = true;
@@ -94,7 +94,7 @@ export class SlotsSorteo2022Component implements OnInit {
         this.setParticipantes(this.forms.formSegundo);
     }
 
-    setParticipantes(form: FormGroup){
+    setParticipantes(form: UntypedFormGroup){
         let data = form.getRawValue();
         let numParticipantes = data.hastaParticipante - data.desdeParticipante;
         this.participantes = [...Array(numParticipantes).keys()];
