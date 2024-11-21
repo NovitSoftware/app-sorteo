@@ -2,9 +2,19 @@
 
 #resultados{
     width: -webkit-fill-available;
-    margin-left: 150px;
-    margin-right: 150px;
+    position: relative;
+    overflow-anchor: auto; 
+    margin-left: 40px;
+    margin-right: 40px;
     
+    .empresaTittle h1{
+        text-align: center;
+        font-size: 48px;
+        color: $color-primary-blue;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
     .resultadoContainer{
         display: flex;
         justify-content: space-between;
@@ -23,6 +33,13 @@
     }
     .resultadoContainer.itemsTabla {
         font-size: 34px;
+    }
+    .resultadoContainer.itemsTabla span {
+        text-align: left;
+      }
+      
+    .resultadoContainer.itemsTabla div {
+    text-align: right;
     }
 }
 

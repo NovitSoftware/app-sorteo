@@ -28,6 +28,6 @@ export class HeadBarComponent implements OnInit {
     }
 
     getVersion(){
-        return this.displayVersion === Version._2022 ? "2022" : "2023"
+        return this.displayVersion === Version._2022 ? "2022" : "2024"
     }
 }

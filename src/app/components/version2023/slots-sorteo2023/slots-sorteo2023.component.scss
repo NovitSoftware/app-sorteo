@@ -1,3 +1,5 @@
+@import "app-colors.scss";
+
 .fullWidth {
     width: -webkit-fill-available !important;
 }
@@ -16,9 +18,44 @@
 .twoColumns {
     width: 84%;
 }
+.sorteoSeparator {
+    border-right: 1px solid $color-gray;
+    margin-top: 1.5em;
+}
 
 #tablaResultadosContainer {
     border-top: 1px solid #f3f3f3;
     padding-top: 2em;
-    display: flex; gap: 9em;
+    display: flex;
+    gap: 9em;
+}
+
+@keyframes excitingCountDown {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+        text-shadow: 0 0 5px #fff, 0 0 10px #ff5733, 0 0 20px #ff5733, 0 0 30px #ffbd33, 0 0 40px #fff;
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(360deg);
+        text-shadow: 0 0 10px #fff, 0 0 20px #ffbd33, 0 0 30px #ffc300, 0 0 40px #ff5733, 0 0 50px #ffbd33;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.5) rotate(720deg);
+        text-shadow: 0 0 5px #fff, 0 0 10px #ff5733, 0 0 15px #ff5733, 0 0 20px #ffc300, 0 0 25px #ffbd33;
+    }
+}
+
+#randomGeneratorStrings span.animate {
+    display: inline-block;
+    animation: excitingCountDown 1s ease-in-out;
+    font-size: 5rem;
+    /* Más grande para dar impacto */
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #ff5733, 0 0 20px #ffc300, 0 0 30px #ffbd33, 0 0 40px #fff;
 }

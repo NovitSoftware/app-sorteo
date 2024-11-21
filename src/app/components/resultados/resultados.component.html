@@ -1,10 +1,13 @@
-<div id="resultados" [ngClass]="{'noMargin version2023': columnaDerecha==='Participante'}">
+<div id="resultados" [ngClass]="{'noMargin version2023': columnaDerecha === 'Participante'}" #resultadosContainer>
+  <div class="empresaTittle">
+    <h1>{{empresa}}</h1>
+  </div>
   <div class="resultadoContainer cabeceraTabla">
     <span>Premio</span>
     <span>{{columnaDerecha}}</span>
   </div>
-  @for (result of results; track result) {
-    <div class="resultadoContainer itemsTabla">
+  @for (result of visibleResults; track result) {
+    <div [@fadeIn] class="resultadoContainer itemsTabla">
       <span>{{result.premio}}</span>
       <div>{{result.texto}}</div>
     </div>

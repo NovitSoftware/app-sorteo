@@ -13,9 +13,11 @@ export class Version2023Component implements OnInit {
 
     @ViewChild('listadosConsultatio') listadosConsultatio!: CargaListadoComponent;
     @ViewChild('listadosNordelta') listadosNordelta!: CargaListadoComponent;
-    @ViewChild('listadosAsset') listadosAsset!: CargaListadoComponent;
+    // @ViewChild('listadosAsset') listadosAsset!: CargaListadoComponent;
 
     @ViewChild('slotsSorteo') slotsSorteo!: SlotsSorteo2023Component;
+
+    initValue: boolean = false;
 
     constructor() { }
 
@@ -25,21 +27,22 @@ export class Version2023Component implements OnInit {
     resetearSorteo(){
         this.listadosConsultatio.resetearSorteo();
         this.listadosNordelta.resetearSorteo();
-        this.listadosAsset.resetearSorteo();
+        // this.listadosAsset.resetearSorteo();
         this.slotsSorteo.resetearSorteo();
+        this.initValue = false;
     }
 
     disableStart(){
-        return (this.listadosConsultatio && this.listadosConsultatio.isInvalid()) || 
-               (this.listadosNordelta && this.listadosNordelta.isInvalid()) ||
-               (this.listadosAsset && this.listadosAsset.isInvalid())
+        return (!this.listadosConsultatio || this.listadosConsultatio.isInvalid()) || 
+        (!this.listadosNordelta || this.listadosNordelta.isInvalid())
+        // (!this.listadosAsset || this.listadosAsset.isInvalid());
     }
 
     comenzarSorteo(){
         let sorteos: Sorteos = {
             consultatio: this.listadosConsultatio.getListados(),
-            nordelta: this.listadosNordelta.getListados(),
-            asset: this.listadosAsset.getListados()
+            nordelta: this.listadosNordelta.getListados()
+            // asset: this.listadosAsset.getListados()
         }
         this.slotsSorteo.startSorteo(sorteos);
     }

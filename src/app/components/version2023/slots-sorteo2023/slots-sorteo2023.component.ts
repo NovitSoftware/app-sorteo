@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -11,12 +11,13 @@ export class SlotsSorteo2023Component implements OnInit {
     @Input() status!: {start: boolean, finish: boolean};
 
     sorteos!: Sorteos;
-    empresaSorteando: "consultatio"|"nordelta"|"asset" = "consultatio";
+    empresaSorteando: "consultatio"|"nordelta"= "consultatio";
     indexPremio: number = 0;
         
     // RESULTADOS SORTEO
     sorteando: boolean = false;
     showParticipante: string = "- - - -";
+    countDown: string = "- - - -";
     winnerIndex: number = 0;
     winner: any|null = null;
     results: any[] = [];
@@ -37,7 +38,7 @@ export class SlotsSorteo2023Component implements OnInit {
         }
     );
 
-    constructor() { }
+    constructor(private renderer: Renderer2, private el: ElementRef) { }
 
     ngOnInit(): void {
     }
@@ -46,6 +47,7 @@ export class SlotsSorteo2023Component implements OnInit {
         this.sorteos = data;
         this.setDefaultIntervalValues();
         this.status.start = true;
+        this.generateWinner();
     }
 
     disableShuffleBtn(){
@@ -74,42 +76,81 @@ export class SlotsSorteo2023Component implements OnInit {
         }
     }
 
-    generateWinner(){
-        this.sorteando = true;
-        this.setDefaultIntervalValues();
-        this.generateInterval();
+    async generateWinner(){
+        await this.runProcess();
     }
 
-    generateInterval(){
-        this.config.intervalSpin = setInterval(() => {
-            let participantes = this.sorteos[this.empresaSorteando].participantes;
+    async runProcess() {
+        const countDownElement = this.el.nativeElement.querySelector('#randomGeneratorStrings span');
 
-            // para evitar que se repita el index;
-            let posibleWinnerIndex = Math.floor((Math.random()*participantes.length));
-            while (this.winnerIndex === posibleWinnerIndex) {
-                posibleWinnerIndex = Math.floor((Math.random()*participantes.length));
-            }
+        for (let i = 10; i > 0; i--) {
+          this.sorteando = true;
 
-            this.winnerIndex = posibleWinnerIndex;
-            this.showParticipante = participantes[this.winnerIndex];
-            this.config.intervalInstance++;
+          // Actualiza el número
+          this.countDown = i.toString();
 
-            if (this.config.intervalInstance === this.config.repetir_N_veces) {
-                this.config.intervalInstance = 1;
-                this.config.microSeg += this.config.microSeg_agregar;
-                this.config.repetir_N_veces -= this.config.restarRepeticiones;
-                if (this.config.repetir_N_veces === this.config.restarRepeticiones) {
-                    this.config.restarRepeticiones = this.config.restarRepeticiones_suspenso;
-                    this.config.microSeg_agregar = this.config.microSeg_suspenso;
+          // Forzar el reinicio de la animación
+          this.renderer.removeClass(countDownElement, 'animate');
+          void countDownElement.offsetWidth; // Forzar reflujo para reiniciar la animación
+          this.renderer.addClass(countDownElement, 'animate');
+
+          // Espera 1 segundo para que la animación se reproduzca
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+
+          // Lógica adicional (como en tu ejemplo)
+          this.setDefaultIntervalValues();
+          await this.generateInterval();
+
+          if (this.sorteos[this.empresaSorteando].premios.length === 0) {
+            console.log('Premios vacíos. Finalizando iteraciones.');
+            break;
+          }
+        }
+
+        
+      }
+
+    async generateInterval(): Promise<void> {
+        return new Promise((resolve) => {
+            this.config.intervalSpin = setInterval(() => {
+                let participantes = this.sorteos[this.empresaSorteando].participantes;
+    
+                // Para evitar que se repita el índice
+                let posibleWinnerIndex = Math.floor(Math.random() * participantes.length);
+                while (this.winnerIndex === posibleWinnerIndex) {
+                    posibleWinnerIndex = Math.floor(Math.random() * participantes.length);
                 }
-                clearInterval(this.config.intervalSpin);
-
-                if (this.config.repetir_N_veces !== 0) this.generateInterval();
-                else this.setWinner();
-            }
-
-        }, this.config.microSeg)
+    
+                this.winnerIndex = posibleWinnerIndex;
+                this.showParticipante = participantes[this.winnerIndex];
+                this.config.intervalInstance++;
+    
+                if (this.config.intervalInstance === this.config.repetir_N_veces) {
+                    this.config.intervalInstance = 1;
+                    this.config.microSeg += this.config.microSeg_agregar;
+                    this.config.repetir_N_veces -= this.config.restarRepeticiones;
+    
+                    if (this.config.repetir_N_veces === this.config.restarRepeticiones) {
+                        this.config.restarRepeticiones = this.config.restarRepeticiones_suspenso;
+                        this.config.microSeg_agregar = this.config.microSeg_suspenso;
+                    }
+    
+                    clearInterval(this.config.intervalSpin);
+    
+                    if (this.config.repetir_N_veces !== 0) {
+                        // Llama recursivamente a la siguiente iteración
+                        resolve(this.generateInterval());
+                    } else {
+                        // Finaliza y resuelve la Promise
+                        this.setWinner();
+                        this.saveResult();
+                        resolve();
+                    }
+                }
+            }, this.config.microSeg);
+        });
     }
+    
 
     setWinner(){
         this.winner = {
@@ -136,13 +177,13 @@ export class SlotsSorteo2023Component implements OnInit {
     checkNextSorteo(){
         
         if (this.indexPremio === this.sorteos[this.empresaSorteando].premios.length) {
-            if (this.empresaSorteando === "asset") {
+            if (this.empresaSorteando === "nordelta") {
                 this.status.finish = true;
                 return
             }
 
             if (this.empresaSorteando === "consultatio") this.empresaSorteando = "nordelta";
-            else if (this.empresaSorteando === "nordelta") this.empresaSorteando = "asset";
+            // else if (this.empresaSorteando === "nordelta") this.empresaSorteando = "asset";
             
             this.indexPremio = 0;
         }
@@ -162,8 +203,8 @@ export class SlotsSorteo2023Component implements OnInit {
 
 export interface Sorteos {
     consultatio: Sorteo,
-    nordelta: Sorteo,
-    asset: Sorteo
+    nordelta: Sorteo
+    // asset: Sorteo
 }
 
 export interface Sorteo {
@@ -182,7 +223,7 @@ export class ConfiguracionRuleta {
     microSeg_agregar: number = 50;
     microSeg_suspenso: number = 85;
     intervalInstance: number = 1;
-    repetir_N_veces: number = 27;
+    repetir_N_veces: number = 9;
     restarRepeticiones: number = 9;
     restarRepeticiones_suspenso: number = 3;
 }

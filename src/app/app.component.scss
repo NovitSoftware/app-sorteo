@@ -6,6 +6,7 @@
     background: $color-primary-blue;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 
     #appBody {
         height: -webkit-fill-available;

@@ -3,22 +3,27 @@
   @if (status.finish) {
     <div class="finDeSorteo">
       <h1>¡Sorteo finalizado!</h1>
+      <h2>Ganadores, te contactaremos mañana</h2>
+      <h2>Felicitaciones mañana te estamos llamando</h2>
     </div>
   }
 
   @if (!status.finish) {
+    
     <div id="buttons">
-      <div id="leftContainer">
+      <!-- <div id="leftContainer">
         <button mat-fab [ngClass]="{'shuffleBtn': !disableShuffleBtn()}" [disabled]="disableShuffleBtn()" (click)="generateWinner()">
           <mat-icon>shuffle</mat-icon>
         </button>
         <button mat-fab [ngClass]="{'okBtn': !disableOkBtn()}" (click)="saveResult()" [disabled]="disableOkBtn()">
           <mat-icon>done</mat-icon>
         </button>
-      </div>
-      <div id="randomGeneratorStrings">
-        <span [ngClass]="{'darkBlue': !sorteando, 'clearBlue': sorteando}">{{showParticipante}}</span>
-      </div>
+      </div> -->
+    </div>
+    <div id="randomGeneratorStrings">
+      <span [ngClass]="{'darkBlue': !sorteando, 'clearBlue': sorteando}" class="animate">
+        {{ countDown }}
+      </span>
     </div>
   }
 
@@ -54,10 +59,11 @@
     </div>
   }
 
-  <div id="tablaResultadosContainer" [ngClass]="{'oneColumn': results.length <= 10, 'twoColumns': results.length > 10}">
-    <app-resultados [results]="results.slice(0, 10)" columnaDerecha="Participante" class="fullWidth"></app-resultados>
-    @if (results.length > 10) {
-      <app-resultados [results]="results.slice(10)" columnaDerecha="Participante" class="fullWidth"></app-resultados>
-    }
-  </div>
+  @if (status.finish) {
+    <div id="tablaResultadosContainer" class="twoColumns">
+      <app-resultados empresa="CONSULTATIO" [results]="results.slice(0, 5)" columnaDerecha="Participante" class="fullWidth"></app-resultados>
+      <div class="sorteoSeparator"></div>
+      <app-resultados empresa="NORDELTA" [results]="results.slice(5)" columnaDerecha="Participante" class="fullWidth"></app-resultados>
+    </div>
+  }
 </div>
