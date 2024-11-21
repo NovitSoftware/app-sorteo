@@ -1,49 +1,57 @@
 <div id="cargaListadosContainer">
-    <input type="file" style="display: none;" (change)="cargarArchivo($event, 'participantes')" #inputParticipantes accept=".txt">   
-    <input type="file" style="display: none;" (change)="cargarArchivo($event, 'premios')" #inputPremios accept=".txt">   
-    
-    <div id="listadosContainer">
-        <div id="participantesContainer">
-            <div class="headerContainer">
-                <h3 style="text-decoration: underline;">PARTICIPANTES</h3>
-                <div class="rightHeaderSection">
-                    <button mat-raised-button class="primaryBtn" (click)="inputParticipantes.click()">Cargar</button>
-                    <mat-icon #tooltip="matTooltip" matTooltip="El archvio .txt debe tener un participante por línea" matTooltipPosition="right">info</mat-icon>
-                </div>
-            </div>
+  <input type="file" style="display: none;" (change)="cargarArchivo($event, 'participantes')" #inputParticipantes accept=".txt">
+  <input type="file" style="display: none;" (change)="cargarArchivo($event, 'premios')" #inputPremios accept=".txt">
 
-            <div *ngIf="participantes.length" class="listadoContainer listadoScroleable">
-                <div *ngFor="let participante of participantes" class="filaTabla">
-                    <span>{{participante}}</span>
-                </div>
-            </div>
+  <div id="listadosContainer">
+    <div id="participantesContainer">
+      <div class="headerContainer">
+        <h3 style="text-decoration: underline;">PARTICIPANTES</h3>
+        <div class="rightHeaderSection">
+          <button mat-raised-button class="primaryBtn" (click)="inputParticipantes.click()">Cargar</button>
+          <mat-icon #tooltip="matTooltip" matTooltip="El archvio .txt debe tener un participante por línea" matTooltipPosition="right">info</mat-icon>
         </div>
+      </div>
 
-        <div id="premiosContainer">
-            <div class="headerContainer">
-                <h3 style="text-decoration: underline;">PREMIOS</h3>
-                <div class="rightHeaderSection">
-                    <button mat-raised-button class="primaryBtn" (click)="inputPremios.click()">Cargar</button>
-                    <mat-icon matTooltip='El archvio .txt debe tener un premio por línea (nombre y cantidad separados por una coma - ej: "Monopatín,3" )' matTooltipPosition="right">info</mat-icon>
-                </div>
+      @if (participantes.length) {
+        <div class="listadoContainer listadoScroleable">
+          @for (participante of participantes; track participante) {
+            <div class="filaTabla">
+              <span>{{participante}}</span>
             </div>
-
-            <span *ngIf="masPremiosQueParticipantes()" class="alert">La cantidad de premios es superior a la de participantes</span>
-
-            <div *ngIf="premios.length" class="listadoContainer">
-                <div class="cabeceraTabla">
-                    <span>Nombre</span>
-                    <span>Cantidad</span>
-                </div>
-                <div class="cuerpoTabla">
-                    <ng-container *ngFor="let premio of premios">
-                        <div class="filaTabla">
-                            <span>{{premio.nombre}}</span>
-                            <span>{{premio.cantidad}}</span>
-                        </div>
-                    </ng-container>
-                </div>
-            </div>
+          }
         </div>
+      }
     </div>
+
+    <div id="premiosContainer">
+      <div class="headerContainer">
+        <h3 style="text-decoration: underline;">PREMIOS</h3>
+        <div class="rightHeaderSection">
+          <button mat-raised-button class="primaryBtn" (click)="inputPremios.click()">Cargar</button>
+          <mat-icon matTooltip='El archvio .txt debe tener un premio por línea (nombre y cantidad separados por una coma - ej: "Monopatín,3" )' matTooltipPosition="right">info</mat-icon>
+        </div>
+      </div>
+
+      @if (masPremiosQueParticipantes()) {
+        <span class="alert">La cantidad de premios es superior a la de participantes</span>
+      }
+
+      @if (premios.length) {
+        <div class="listadoContainer">
+          <div class="cabeceraTabla">
+            <span>Nombre</span>
+            <span>Cantidad</span>
+          </div>
+          <div class="cuerpoTabla">
+            @for (premio of premios; track premio) {
+              <div class="filaTabla">
+                <span>{{premio.nombre}}</span>
+                <span>{{premio.cantidad}}</span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
 </div>

@@ -1,30 +1,44 @@
 <div id=sorteoContainer>
 
-    <div *ngIf="status.finish" class="finDeSorteo">
-        <h1>¡Sorteo finalizado!</h1>
+  @if (status.finish) {
+    <div class="finDeSorteo">
+      <h1>¡Sorteo finalizado!</h1>
     </div>
+  }
 
-    <div *ngIf="!status.finish" id="buttons">
-        <button mat-fab [ngClass]="{'shuffleBtn': !disableShuffleBtn()}" [disabled]="disableShuffleBtn()" (click)="generateWinner()">
-            <mat-icon>shuffle</mat-icon>
-        </button>
-
-        <div id="randomGenerator">
-            <div *ngIf="!sorteando" style="display: flex;">
-                <div *ngFor="let letter of cantidadCifras" class="cifra"> – </div>
-            </div>
-            <div *ngIf="sorteando" style="display: flex;">
-                <div *ngFor="let item of showWinnerNumber" class="cifra">
-                    <span *ngIf="!item.show" class="clearBlue">{{item.placeholder}}</span>
-                    <span *ngIf="item.show" class="darkBlue">{{item.letter}}</span>
-                </div>
-            </div>
-        </div>
-
-        <button mat-fab [ngClass]="{'okBtn': !disableOkBtn()}" (click)="saveResult()" [disabled]="disableOkBtn()">
-            <mat-icon>done</mat-icon>
-        </button>
+  @if (!status.finish) {
+    <div id="buttons">
+      <button mat-fab [ngClass]="{'shuffleBtn': !disableShuffleBtn()}" [disabled]="disableShuffleBtn()" (click)="generateWinner()">
+        <mat-icon>shuffle</mat-icon>
+      </button>
+      <div id="randomGenerator">
+        @if (!sorteando) {
+          <div style="display: flex;">
+            @for (letter of cantidadCifras; track letter) {
+              <div class="cifra"> – </div>
+            }
+          </div>
+        }
+        @if (sorteando) {
+          <div style="display: flex;">
+            @for (item of showWinnerNumber; track item) {
+              <div class="cifra">
+                @if (!item.show) {
+                  <span class="clearBlue">{{item.placeholder}}</span>
+                }
+                @if (item.show) {
+                  <span class="darkBlue">{{item.letter}}</span>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+      <button mat-fab [ngClass]="{'okBtn': !disableOkBtn()}" (click)="saveResult()" [disabled]="disableOkBtn()">
+        <mat-icon>done</mat-icon>
+      </button>
     </div>
+  }
 
-    <app-resultados [results]="results" columnaDerecha="Número" class="fullWidth"></app-resultados>
+  <app-resultados [results]="results" columnaDerecha="Número" class="fullWidth"></app-resultados>
 </div>

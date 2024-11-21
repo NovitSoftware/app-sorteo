@@ -1,13 +1,19 @@
-  <div id="app">
-    <app-head-bar #headBar [displayVersion]="displayVersion" [status]="status" (fireResetearSorteo)="resetearSorteo()"></app-head-bar>
+<div id="app">
+  <app-head-bar #headBar [displayVersion]="displayVersion" [status]="status" (fireResetearSorteo)="resetearSorteo()"></app-head-bar>
 
-    <mat-button-toggle-group *ngIf="showVersionControl" #toggleGroup="matButtonToggleGroup" id="toggleVersion" [value]="displayVersion" (change)="changeVersionDisplaying(toggleGroup.value)">
-        <mat-button-toggle [value]="version._2022">2022</mat-button-toggle>
-        <mat-button-toggle [value]="version._2023">2023</mat-button-toggle>
+  @if (showVersionControl) {
+    <mat-button-toggle-group #toggleGroup="matButtonToggleGroup" id="toggleVersion" [value]="displayVersion" (change)="changeVersionDisplaying(toggleGroup.value)">
+      <mat-button-toggle [value]="version._2022">2022</mat-button-toggle>
+      <mat-button-toggle [value]="version._2023">2023</mat-button-toggle>
     </mat-button-toggle-group>
-      
-    <div id="appBody">
-        <app-version2022 *ngIf="displayVersion === version._2022" class="fullWidth centerContainer" #version2022 [status]="status"></app-version2022>
-        <app-version2023 *ngIf="displayVersion === version._2023" class="fullWidth centerContainer" #version2023 [status]="status"></app-version2023>
-    </div>
+  }
+
+  <div id="appBody">
+    @if (displayVersion === version._2022) {
+      <app-version2022 class="fullWidth centerContainer" #version2022 [status]="status"></app-version2022>
+    }
+    @if (displayVersion === version._2023) {
+      <app-version2023 class="fullWidth centerContainer" #version2023 [status]="status"></app-version2023>
+    }
   </div>
+</div>

@@ -1,58 +1,63 @@
 <div id="sorteoContainer" class="fullWidth">
 
-    <div *ngIf="status.finish" class="finDeSorteo">
-        <h1>¡Sorteo finalizado!</h1>
+  @if (status.finish) {
+    <div class="finDeSorteo">
+      <h1>¡Sorteo finalizado!</h1>
     </div>
+  }
 
-    <div *ngIf="!status.finish" id="buttons">
-
-        <div id="leftContainer">
-            <button mat-fab [ngClass]="{'shuffleBtn': !disableShuffleBtn()}" [disabled]="disableShuffleBtn()" (click)="generateWinner()">
-                <mat-icon>shuffle</mat-icon>
-            </button>
-            <button mat-fab [ngClass]="{'okBtn': !disableOkBtn()}" (click)="saveResult()" [disabled]="disableOkBtn()">
-                <mat-icon>done</mat-icon>
-            </button>
-        </div>
-
-        <div id="randomGeneratorStrings">
-            <span [ngClass]="{'darkBlue': !sorteando, 'clearBlue': sorteando}">{{showParticipante}}</span>
-        </div>
-
+  @if (!status.finish) {
+    <div id="buttons">
+      <div id="leftContainer">
+        <button mat-fab [ngClass]="{'shuffleBtn': !disableShuffleBtn()}" [disabled]="disableShuffleBtn()" (click)="generateWinner()">
+          <mat-icon>shuffle</mat-icon>
+        </button>
+        <button mat-fab [ngClass]="{'okBtn': !disableOkBtn()}" (click)="saveResult()" [disabled]="disableOkBtn()">
+          <mat-icon>done</mat-icon>
+        </button>
+      </div>
+      <div id="randomGeneratorStrings">
+        <span [ngClass]="{'darkBlue': !sorteando, 'clearBlue': sorteando}">{{showParticipante}}</span>
+      </div>
     </div>
+  }
 
-    <div *ngIf="TESTEANDO_RULETA">
-        <span class="inputTitle">Configuración de Ruleta</span>
-        <form [formGroup]="TESTEO_CONFIG" class="inputs" style="width: 450px; display: flex; justify-content: space-between; flex-wrap: wrap;">
-            <mat-form-field class="inputNumero" appearance="fill">
-                <mat-label>Micro segundos inicial</mat-label>
-                <input formControlName="microSeg" matInput type="number">
-            </mat-form-field>
-            <mat-form-field class="inputNumero" appearance="fill">
-                <mat-label>Sumar micro segundos</mat-label>
-                <input formControlName="microSeg_agregar" matInput type="number">
-            </mat-form-field>
-            <mat-form-field class="inputNumero" appearance="fill">
-                <mat-label>Sumar micro seg suspenso</mat-label>
-                <input formControlName="microSeg_suspenso" matInput type="number">
-            </mat-form-field>
-            <mat-form-field class="inputNumero" appearance="fill">
-                <mat-label>Repeticiones</mat-label>
-                <input formControlName="repetir_N_veces" matInput type="number">
-            </mat-form-field>
-            <mat-form-field class="inputNumero" appearance="fill">
-                <mat-label>Restar repeticiones</mat-label>
-                <input formControlName="restarRepeticiones" matInput type="text">
-            </mat-form-field>
-            <mat-form-field class="inputNumero" appearance="fill">
-                <mat-label>Restar repeticiones suspenso</mat-label>
-                <input formControlName="restarRepeticiones_suspenso" matInput type="text">
-            </mat-form-field>
-        </form>
+  @if (TESTEANDO_RULETA) {
+    <div>
+      <span class="inputTitle">Configuración de Ruleta</span>
+      <form [formGroup]="TESTEO_CONFIG" class="inputs" style="width: 450px; display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <mat-form-field class="inputNumero" appearance="fill">
+          <mat-label>Micro segundos inicial</mat-label>
+          <input formControlName="microSeg" matInput type="number">
+        </mat-form-field>
+        <mat-form-field class="inputNumero" appearance="fill">
+          <mat-label>Sumar micro segundos</mat-label>
+          <input formControlName="microSeg_agregar" matInput type="number">
+        </mat-form-field>
+        <mat-form-field class="inputNumero" appearance="fill">
+          <mat-label>Sumar micro seg suspenso</mat-label>
+          <input formControlName="microSeg_suspenso" matInput type="number">
+        </mat-form-field>
+        <mat-form-field class="inputNumero" appearance="fill">
+          <mat-label>Repeticiones</mat-label>
+          <input formControlName="repetir_N_veces" matInput type="number">
+        </mat-form-field>
+        <mat-form-field class="inputNumero" appearance="fill">
+          <mat-label>Restar repeticiones</mat-label>
+          <input formControlName="restarRepeticiones" matInput type="text">
+        </mat-form-field>
+        <mat-form-field class="inputNumero" appearance="fill">
+          <mat-label>Restar repeticiones suspenso</mat-label>
+          <input formControlName="restarRepeticiones_suspenso" matInput type="text">
+        </mat-form-field>
+      </form>
     </div>
+  }
 
-    <div id="tablaResultadosContainer" [ngClass]="{'oneColumn': results.length <= 10, 'twoColumns': results.length > 10}">
-        <app-resultados [results]="results.slice(0, 10)" columnaDerecha="Participante" class="fullWidth"></app-resultados>
-        <app-resultados *ngIf="results.length > 10" [results]="results.slice(10)" columnaDerecha="Participante" class="fullWidth"></app-resultados>
-    </div>
+  <div id="tablaResultadosContainer" [ngClass]="{'oneColumn': results.length <= 10, 'twoColumns': results.length > 10}">
+    <app-resultados [results]="results.slice(0, 10)" columnaDerecha="Participante" class="fullWidth"></app-resultados>
+    @if (results.length > 10) {
+      <app-resultados [results]="results.slice(10)" columnaDerecha="Participante" class="fullWidth"></app-resultados>
+    }
+  </div>
 </div>

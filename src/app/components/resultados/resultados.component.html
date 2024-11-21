@@ -1,10 +1,12 @@
 <div id="resultados" [ngClass]="{'noMargin version2023': columnaDerecha==='Participante'}">
-    <div class="resultadoContainer cabeceraTabla">
-        <span>Premio</span>
-        <span>{{columnaDerecha}}</span>
+  <div class="resultadoContainer cabeceraTabla">
+    <span>Premio</span>
+    <span>{{columnaDerecha}}</span>
+  </div>
+  @for (result of results; track result) {
+    <div class="resultadoContainer itemsTabla">
+      <span>{{result.premio}}</span>
+      <div>{{result.texto}}</div>
     </div>
-    <div class="resultadoContainer itemsTabla" *ngFor="let result of results">
-        <span>{{result.premio}}</span>
-        <div>{{result.texto}}</div>
-    </div>
+  }
 </div>
