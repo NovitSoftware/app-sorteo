@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-slots-sorteo2023',
@@ -26,14 +26,14 @@ export class SlotsSorteo2023Component implements OnInit {
     
     // 
     TESTEANDO_RULETA: boolean = false;
-    TESTEO_CONFIG = new FormGroup(
+    TESTEO_CONFIG = new UntypedFormGroup(
         {
-            microSeg: new FormControl('50', [Validators.required]),
-            microSeg_agregar: new FormControl('50', [Validators.required]),
-            microSeg_suspenso: new FormControl('85', [Validators.required]),
-            repetir_N_veces: new FormControl('27', [Validators.required]),
-            restarRepeticiones: new FormControl('9', [Validators.required]),
-            restarRepeticiones_suspenso: new FormControl('3', [Validators.required]),
+            microSeg: new UntypedFormControl('50', [Validators.required]),
+            microSeg_agregar: new UntypedFormControl('50', [Validators.required]),
+            microSeg_suspenso: new UntypedFormControl('85', [Validators.required]),
+            repetir_N_veces: new UntypedFormControl('27', [Validators.required]),
+            restarRepeticiones: new UntypedFormControl('9', [Validators.required]),
+            restarRepeticiones_suspenso: new UntypedFormControl('3', [Validators.required]),
         }
     );
 
