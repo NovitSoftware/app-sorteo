@@ -20,7 +20,7 @@ export class SlotsSorteo2023Component implements OnInit {
     countDown: string = "- - - -";
     winnerIndex: number = 0;
     winner: any|null = null;
-    results: any[] = [];
+    results: { texto: string; premio: string; empresa: string }[] = [];
 
     // CONFIGURACION DE "RULETA"
     config: ConfiguracionRuleta = new ConfiguracionRuleta();
@@ -76,6 +76,14 @@ export class SlotsSorteo2023Component implements OnInit {
         }
     }
 
+    get consultatioResults() {
+        return this.results?.filter(result => result.empresa === 'consultatio') || [];
+    }
+
+    get nordeltaResults() {
+        return this.results?.filter(result => result.empresa === 'nordelta') || [];
+    }
+
     async generateWinner(){
         await this.runProcess();
     }
@@ -83,7 +91,8 @@ export class SlotsSorteo2023Component implements OnInit {
     async runProcess() {
         const countDownElement = this.el.nativeElement.querySelector('#randomGeneratorStrings span');
 
-        for (let i = 10; i > 0; i--) {
+        var premiosLenght = this.sorteos["nordelta"].premios.length + this.sorteos["consultatio"].premios.length;
+        for (let i = premiosLenght; i > 0; i--) {
           this.sorteando = true;
 
           // Actualiza el número
@@ -155,7 +164,8 @@ export class SlotsSorteo2023Component implements OnInit {
     setWinner(){
         this.winner = {
             texto: this.showParticipante,
-            premio: this.sorteos[this.empresaSorteando].premios[this.indexPremio]
+            premio: this.sorteos[this.empresaSorteando].premios[this.indexPremio],
+            empresa: this.empresaSorteando
         }
         
         setTimeout(() => {
