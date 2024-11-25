@@ -11,8 +11,8 @@
     
     <div id="buttons">
       @if (!disableShuffleBtn()) {
-        <div id="leftContainer">
-          <button mat-fab [ngClass]="{'shuffleBtn': !disableShuffleBtn()}" (click)="generateWinner()">
+        <div id="leftContainer" (click)="generateWinner()" class="clickableContainer">
+          <button mat-fab [ngClass]="{'shuffleBtn': !disableShuffleBtn()}">
             <mat-icon>timer</mat-icon>
           </button>
           <h1>Iniciar</h1>
