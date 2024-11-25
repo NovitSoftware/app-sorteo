@@ -8,10 +8,26 @@
     width: -webkit-fill-available;
 }
 
+.fullHeight {
+    height: -webkit-fill-available !important;
+}
+
 .widthSlots {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.sorteoContainer {
+    .svgIcon {
+        width: 200px;
+        height: 50px;
+    }
+    
+    .scndIcon {
+        width: 400px;
+        height: 54px;
+    }
 }
 
 #initContainer {

@@ -21,5 +21,14 @@ export class SvgService {
       "nordeltaBlanco",
       this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/nordelta-blanco.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      "consultatioGrisOscuro",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/consultatio-logo-grisOsc2.svg")
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      "nordeltaGrisOscuro",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/nordelta-grisOsc.svg")
+    );
   }
 }

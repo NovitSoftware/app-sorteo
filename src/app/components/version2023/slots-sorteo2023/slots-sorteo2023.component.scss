@@ -3,6 +3,9 @@
 .fullWidth {
     width: -webkit-fill-available !important;
 }
+.fullHeight {
+    height: -webkit-fill-available !important;
+}
 
 #sorteoContainer #buttons {
     width: 60%;
@@ -28,6 +31,11 @@
     padding-top: 2em;
     display: flex;
     gap: 9em;
+}
+
+.numberFormat {
+    font-size: 200px !important;
+    font-family: "LatinxText-Bold";
 }
 
 @keyframes excitingCountDown {

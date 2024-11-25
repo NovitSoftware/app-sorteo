@@ -18,6 +18,8 @@ export class ResultadosComponent implements OnInit {
   @Input() results!: { texto: number | string; premio: string }[];
   @Input() columnaDerecha!: string;
   @Input() empresa!: string;
+  @Input() classEmpresa: string = '';
+  @Input() sgvIconEmpresa: string = '';
 
   @ViewChild('resultadosContainer') resultadosContainer!: ElementRef;
   visibleResults: any[] = [];

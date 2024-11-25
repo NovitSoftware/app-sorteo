@@ -16,8 +16,9 @@ export class SlotsSorteo2023Component implements OnInit {
         
     // RESULTADOS SORTEO
     sorteando: boolean = false;
+    sorteoHasStarted: boolean = false;
     showParticipante: string = "- - - -";
-    countDown: string = "- - - -";
+    countDown: string = "";
     winnerIndex: number = 0;
     winner: any|null = null;
     results: { texto: string; premio: string; empresa: string }[] = [];
@@ -47,12 +48,11 @@ export class SlotsSorteo2023Component implements OnInit {
         this.sorteos = data;
         this.setDefaultIntervalValues();
         this.status.start = true;
-        this.generateWinner();
     }
 
     disableShuffleBtn(){
         // return this.sorteando || this.winner !== null
-        return this.sorteando
+        return this.sorteoHasStarted;
     }
 
     disableOkBtn(){
@@ -85,6 +85,7 @@ export class SlotsSorteo2023Component implements OnInit {
     }
 
     async generateWinner(){
+        this.sorteoHasStarted = true;
         await this.runProcess();
     }
 
@@ -177,7 +178,7 @@ export class SlotsSorteo2023Component implements OnInit {
         this.results.push(this.winner);
         this.sorteos[this.empresaSorteando].participantes.splice(this.winnerIndex, 1); 
         
-        this.showParticipante = "- - - -";
+        this.showParticipante = "";
         this.winner = null;
         this.indexPremio++;
 
@@ -204,6 +205,7 @@ export class SlotsSorteo2023Component implements OnInit {
         this.results = [];
         this.winner = null;
         this.sorteando = false;
+        this.sorteoHasStarted = false;
         this.setDefaultIntervalValues();
         this.indexPremio = 0;
         this.empresaSorteando = "consultatio";

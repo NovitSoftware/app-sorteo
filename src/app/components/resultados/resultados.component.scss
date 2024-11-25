@@ -21,7 +21,7 @@
         padding-top: 10px;
         padding-bottom: 10px;
         border-top: 1px solid #f3f3f3;
-        color: $color-primary-blue;
+        color: $color-primary-black;
     }
 
     .resultadoContainer.cabeceraTabla {
@@ -40,6 +40,17 @@
       
     .resultadoContainer.itemsTabla div {
     text-align: right;
+    }
+}
+.empresaTittle {
+    .svgIcon {
+        width: 200px;
+        height: 50px;
+    }
+    
+    .scndIcon {
+        width: 400px;
+        height: 54px;
     }
 }
 

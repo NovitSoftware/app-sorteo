@@ -1,12 +1,16 @@
 <div id="initContainer" [ngClass]="{'hidden': status.start}">
     <div id="empresasContainer">
         <div class="sorteoContainer">
-            <h1>CONSULTATIO</h1>
+            <h1>
+                <mat-icon class="svgIcon" svgIcon="consultatioGrisOscuro"></mat-icon>
+            </h1>
             <app-carga-listado #listadosConsultatio class="fullWidth"></app-carga-listado>
         </div>
         <div class="sorteoSeparator"></div>
         <div class="sorteoContainer">
-            <h1>NORDELTA</h1>
+            <h1>
+                <mat-icon class="scndIcon" svgIcon="nordeltaGrisOscuro"></mat-icon>
+            </h1>
             <app-carga-listado #listadosNordelta class="fullWidth"></app-carga-listado>
         </div>
         <!-- <div class="sorteoSeparator"></div>

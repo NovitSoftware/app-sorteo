@@ -1,6 +1,9 @@
 <div id="resultados" [ngClass]="{'noMargin version2023': columnaDerecha === 'Participante'}" #resultadosContainer>
   <div class="empresaTittle">
-    <h1>{{empresa}}</h1>
+    <h1>
+      <mat-icon class="{{classEmpresa}}" svgIcon="{{sgvIconEmpresa}}">
+      </mat-icon>
+    </h1>
   </div>
   <div class="resultadoContainer cabeceraTabla">
     <span>Premio</span>

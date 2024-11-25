@@ -1,4 +1,4 @@
-<div id="sorteoContainer" class="fullWidth">
+<div id="sorteoContainer" class="fullWidth fullHeight">
 
   @if (status.finish) {
     <div class="finDeSorteo">
@@ -10,17 +10,20 @@
   @if (!status.finish) {
     
     <div id="buttons">
-      <!-- <div id="leftContainer">
-        <button mat-fab [ngClass]="{'shuffleBtn': !disableShuffleBtn()}" [disabled]="disableShuffleBtn()" (click)="generateWinner()">
-          <mat-icon>shuffle</mat-icon>
-        </button>
-        <button mat-fab [ngClass]="{'okBtn': !disableOkBtn()}" (click)="saveResult()" [disabled]="disableOkBtn()">
-          <mat-icon>done</mat-icon>
-        </button>
-      </div> -->
+      @if (!disableShuffleBtn()) {
+        <div id="leftContainer">
+          <button mat-fab [ngClass]="{'shuffleBtn': !disableShuffleBtn()}" (click)="generateWinner()">
+            <mat-icon>timer</mat-icon>
+          </button>
+          <h1>Iniciar</h1>
+          <!-- <button mat-fab [ngClass]="{'okBtn': !disableOkBtn()}" (click)="saveResult()" [disabled]="disableOkBtn()">
+            <mat-icon>done</mat-icon>
+          </button> -->
+        </div>
+      }
     </div>
     <div id="randomGeneratorStrings">
-      <span [ngClass]="{'darkBlue': !sorteando, 'clearBlue': sorteando}" class="animate">
+      <span [ngClass]="{'darkBlue': !sorteando, 'clearBlue': sorteando}" class="animate numberFormat">
         {{ countDown }}
       </span>
     </div>
@@ -61,14 +64,16 @@
   @if (status.finish) {
     <div id="tablaResultadosContainer" class="twoColumns">
       <app-resultados 
-        empresa="CONSULTATIO" 
+        classEmpresa="svgIcon"
+        sgvIconEmpresa="consultatioGrisOscuro"
         [results]="consultatioResults" 
         columnaDerecha="Participante" 
         class="fullWidth">
       </app-resultados>
       <div class="sorteoSeparator"></div>
       <app-resultados 
-        empresa="NORDELTA" 
+        classEmpresa="scndIcon"
+        sgvIconEmpresa="nordeltaGrisOscuro"
         [results]="nordeltaResults" 
         columnaDerecha="Participante" 
         class="fullWidth">

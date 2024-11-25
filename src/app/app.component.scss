@@ -31,6 +31,9 @@
 .fullWidth {
     width: -webkit-fill-available;
 }
+.fullHeight {
+    height: -webkit-fill-available !important;
+}
 
 .centerContainer {
     display: flex;
