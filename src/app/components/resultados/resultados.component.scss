@@ -43,14 +43,17 @@
     }
 }
 .empresaTittle {
+    text-align: center;
+    margin-bottom: 20px;
     .svgIcon {
-        width: 200px;
-        height: 50px;
+        width: auto;
+        height: 48px;
+        padding-bottom: 22px;
     }
     
     .scndIcon {
-        width: 400px;
-        height: 54px;
+        width: auto;
+        height: 70px;
     }
 }
 

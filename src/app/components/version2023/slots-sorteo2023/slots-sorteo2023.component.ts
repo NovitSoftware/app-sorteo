@@ -91,116 +91,128 @@ export class SlotsSorteo2023Component implements OnInit {
 
     async runProcess() {
         const countDownElement = this.el.nativeElement.querySelector('#randomGeneratorStrings span');
-
-        var premiosLenght = this.sorteos["nordelta"].premios.length + this.sorteos["consultatio"].premios.length;
-        for (let i = premiosLenght; i > 0; i--) {
-          this.sorteando = true;
-
-          // Actualiza el número
-          this.countDown = i.toString();
-
-          // Forzar el reinicio de la animación
-          this.renderer.removeClass(countDownElement, 'animate');
-          void countDownElement.offsetWidth; // Forzar reflujo para reiniciar la animación
-          this.renderer.addClass(countDownElement, 'animate');
-
-          // Espera 1 segundo para que la animación se reproduzca
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-
-          // Lógica adicional (como en tu ejemplo)
-          this.setDefaultIntervalValues();
-          await this.generateInterval();
-
-          if (this.sorteos[this.empresaSorteando].premios.length === 0) {
-            console.log('Premios vacíos. Finalizando iteraciones.');
-            break;
-          }
-        }
-
-        
-      }
-
-    async generateInterval(): Promise<void> {
-        return new Promise((resolve) => {
-            this.config.intervalSpin = setInterval(() => {
-                let participantes = this.sorteos[this.empresaSorteando].participantes;
     
-                // Para evitar que se repita el índice
+        this.countDown = "10"; // Inicializa el countdown
+        this.sorteando = true;
+    
+        // Inicia las tareas en paralelo
+        const intervalPromise = this.generateInterval(); // Calcula los ganadores
+        const countdownPromise = this.runCountdown(countDownElement); // Maneja el countdown visual
+    
+        // Esperar a que ambas tareas terminen
+        await Promise.all([intervalPromise, countdownPromise]);
+    
+        // Cambiar el estado del sorteo
+        this.status.finish = true;
+    
+        // Reiniciar estados
+        this.sorteando = false;
+        console.log('Sorteo finalizado.');
+    }
+    
+    
+    
+
+    async runCountdown(countDownElement: HTMLElement) {
+        for (let i = 10; i >= 0; i--) {
+            this.countDown = i.toString(); // Actualiza el countdown visual
+    
+            this.renderer.removeClass(countDownElement, 'animate');
+            void countDownElement.offsetWidth; // Forzar reflujo para reiniciar la animación
+            this.renderer.addClass(countDownElement, 'animate');
+    
+            // Espera para que la animación del countdown se reproduzca
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // 1 segundo por iteración
+        }
+    
+        console.log('Countdown completado.');
+    }
+    
+    async generateInterval(): Promise<void> {
+        const empresas = ["consultatio", "nordelta"] as const;
+    
+        for (const empresa of empresas) {
+            this.empresaSorteando = empresa;
+    
+            while (this.sorteos[this.empresaSorteando].premios.length > 0) {
+                const participantes = this.sorteos[this.empresaSorteando].participantes;
+                const premios = this.sorteos[this.empresaSorteando].premios;
+    
+                // Validación: Participantes y Premios no deben estar vacíos
+                if (!participantes || participantes.length === 0) {
+                    console.error(`No hay participantes disponibles para ${empresa}.`);
+                    break;
+                }
+    
+                if (!premios || premios.length === 0) {
+                    console.error(`No hay premios disponibles para ${empresa}.`);
+                    break;
+                }
+    
+                // Genera un índice aleatorio para elegir al ganador
                 let posibleWinnerIndex = Math.floor(Math.random() * participantes.length);
-                while (this.winnerIndex === posibleWinnerIndex) {
+    
+                // Evita repetir el mismo ganador consecutivamente
+                while (this.winnerIndex === posibleWinnerIndex && participantes.length > 1) {
                     posibleWinnerIndex = Math.floor(Math.random() * participantes.length);
                 }
     
                 this.winnerIndex = posibleWinnerIndex;
                 this.showParticipante = participantes[this.winnerIndex];
-                this.config.intervalInstance++;
+                console.log(`Seleccionado en ${empresa}: ${this.showParticipante}`);
     
-                if (this.config.intervalInstance === this.config.repetir_N_veces) {
-                    this.config.intervalInstance = 1;
-                    this.config.microSeg += this.config.microSeg_agregar;
-                    this.config.repetir_N_veces -= this.config.restarRepeticiones;
+                // Establece al ganador y guarda el resultado
+                this.setWinner();
+                this.saveResult();
     
-                    if (this.config.repetir_N_veces === this.config.restarRepeticiones) {
-                        this.config.restarRepeticiones = this.config.restarRepeticiones_suspenso;
-                        this.config.microSeg_agregar = this.config.microSeg_suspenso;
-                    }
+                // Pausa breve para liberar el hilo y permitir actualizaciones de renderizado
+                await new Promise((resolve) => setTimeout(resolve, 0));
+            }
     
-                    clearInterval(this.config.intervalSpin);
+            console.log(`Finalizado el sorteo para ${empresa}.`);
+        }
     
-                    if (this.config.repetir_N_veces !== 0) {
-                        // Llama recursivamente a la siguiente iteración
-                        resolve(this.generateInterval());
-                    } else {
-                        // Finaliza y resuelve la Promise
-                        this.setWinner();
-                        this.saveResult();
-                        resolve();
-                    }
-                }
-            }, this.config.microSeg);
-        });
+        console.log('Sorteo completado para todas las empresas.');
     }
-    
 
-    setWinner(){
+    setWinner() {
+        const premios = this.sorteos[this.empresaSorteando].premios;
+    
+        if (premios.length === 0) {
+            console.error(`No hay premios disponibles para ${this.empresaSorteando}`);
+            return;
+        }
+    
         this.winner = {
             texto: this.showParticipante,
-            premio: this.sorteos[this.empresaSorteando].premios[this.indexPremio],
+            premio: premios[this.indexPremio], // Asignar premio correctamente
             empresa: this.empresaSorteando
-        }
-        
-        setTimeout(() => {
-            this.sorteando = false;
-        }, 1000)
+        };
     }
     
-    saveResult(){
+    
+    saveResult() {
+        if (!this.winner) {
+            console.error('No se puede guardar un ganador porque no se ha seleccionado uno.');
+            return;
+        }
+    
+        // Guarda el ganador en los resultados
         this.results.push(this.winner);
-        this.sorteos[this.empresaSorteando].participantes.splice(this.winnerIndex, 1); 
-        
+    
+        // Elimina al participante seleccionado
+        this.sorteos[this.empresaSorteando].participantes.splice(this.winnerIndex, 1);
+    
+        // Elimina el premio asignado
+        this.sorteos[this.empresaSorteando].premios.shift();
+    
+        // Limpia los datos temporales del ganador
         this.showParticipante = "";
         this.winner = null;
-        this.indexPremio++;
-
-        this.checkNextSorteo();
+    
+        console.log(`Resultado guardado: ${JSON.stringify(this.results[this.results.length - 1])}`);
     }
     
-    checkNextSorteo(){
-        
-        if (this.indexPremio === this.sorteos[this.empresaSorteando].premios.length) {
-            if (this.empresaSorteando === "nordelta") {
-                this.status.finish = true;
-                return
-            }
-
-            if (this.empresaSorteando === "consultatio") this.empresaSorteando = "nordelta";
-            // else if (this.empresaSorteando === "nordelta") this.empresaSorteando = "asset";
-            
-            this.indexPremio = 0;
-        }
-
-    }
-
     resetearSorteo(){
         this.results = [];
         this.winner = null;
