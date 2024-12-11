@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sorteo-consultatio": {
+    "sorteo-wen": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -78,10 +78,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "sorteo-consultatio:build:production"
+              "buildTarget": "sorteo-wen:build:production"
             },
             "development": {
-              "buildTarget": "sorteo-consultatio:build:development"
+              "buildTarget": "sorteo-wen:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -89,7 +89,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "sorteo-consultatio:build"
+            "buildTarget": "sorteo-wen:build"
           }
         },
         "test": {
@@ -113,5 +113,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

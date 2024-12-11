@@ -1,0 +1,8 @@
+<div class="ruleta-container">
+  <div class="ruleta">
+    <div *ngFor="let item of items" [class.selected]="item === selectedItem">
+      {{ item }}
+    </div>
+  </div>
+  <button mat-raised-button color="primary" (click)="startRuleta()">Iniciar Ruleta</button>
+</div>

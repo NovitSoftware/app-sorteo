@@ -8,42 +8,32 @@ import { CargaListadoComponent } from './carga-listado/carga-listado.component';
   styleUrls: ['./version2023.component.scss']
 })
 export class Version2023Component implements OnInit {
+  @Input() status!: { start: boolean, finish: boolean };
 
-    @Input() status!: {start: boolean, finish: boolean};
+  @ViewChild('listadoswen') listadoswen!: CargaListadoComponent;
+  @ViewChild('slotsSorteo') slotsSorteo!: SlotsSorteo2023Component;
 
-    @ViewChild('listadosConsultatio') listadosConsultatio!: CargaListadoComponent;
-    @ViewChild('listadosNordelta') listadosNordelta!: CargaListadoComponent;
-    // @ViewChild('listadosAsset') listadosAsset!: CargaListadoComponent;
+  initValue: boolean = false;
 
-    @ViewChild('slotsSorteo') slotsSorteo!: SlotsSorteo2023Component;
+  constructor() { }
 
-    initValue: boolean = false;
+  ngOnInit(): void {
+  }
 
-    constructor() { }
+  resetearSorteo() {
+    this.listadoswen.resetearSorteo();
+    this.slotsSorteo.resetearSorteo();
+    this.initValue = false;
+  }
 
-    ngOnInit(): void {
+  disableStart() {
+    return (!this.listadoswen || this.listadoswen.isInvalid());
+  }
+
+  comenzarSorteo() {
+    let sorteos: Sorteos = {
+      wen: this.listadoswen.getListados()
     }
-
-    resetearSorteo(){
-        this.listadosConsultatio.resetearSorteo();
-        this.listadosNordelta.resetearSorteo();
-        // this.listadosAsset.resetearSorteo();
-        this.slotsSorteo.resetearSorteo();
-        this.initValue = false;
-    }
-
-    disableStart(){
-        return (!this.listadosConsultatio || this.listadosConsultatio.isInvalid()) || 
-        (!this.listadosNordelta || this.listadosNordelta.isInvalid())
-        // (!this.listadosAsset || this.listadosAsset.isInvalid());
-    }
-
-    comenzarSorteo(){
-        let sorteos: Sorteos = {
-            consultatio: this.listadosConsultatio.getListados(),
-            nordelta: this.listadosNordelta.getListados()
-            // asset: this.listadosAsset.getListados()
-        }
-        this.slotsSorteo.startSorteo(sorteos);
-    }
+    this.slotsSorteo.startSorteo(sorteos);
+  }
 }

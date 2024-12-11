@@ -33,6 +33,7 @@
     }
     .resultadoContainer.itemsTabla {
         font-size: 34px;
+        transition: transform 0.3s ease-in-out;
     }
     .resultadoContainer.itemsTabla span {
         text-align: left;
@@ -46,8 +47,8 @@
     text-align: center;
     margin-bottom: 20px;
     .svgIcon {
-        width: auto;
-        height: 48px;
+        width: 340px;
+        height: 100%;
         padding-bottom: 22px;
     }
     

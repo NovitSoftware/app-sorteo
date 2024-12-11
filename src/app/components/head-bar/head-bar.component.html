@@ -1,10 +1,8 @@
 <div id="headBar">
-    <h1 class="sorteo" (click)="resetearSorteo()" [ngClass]="{'clickable': status.finish }">Sorteo {{getVersion()}}</h1>
+    <h1 class="sorteo" (click)="resetearSorteo()" [ngClass]="{'clickable': status.finish }">Sorteo {{currentYear}}</h1>
     <div style="display: flex; align-items: center;">
         <div id="iconGroup">
-            <mat-icon class="svgIcon" svgIcon="consultatioBlanco"></mat-icon>
-                <span class="separator"></span>
-            <mat-icon class="svgIcon scndIcon" svgIcon="nordeltaBlanco"></mat-icon>
+            <!-- <mat-icon class="svgIcon" svgIcon="novitLogoBlanco"></mat-icon> -->
         </div>
         <!-- <span class="separator"></span>
         <img src="assets/asset-img.png" style="height: 50px;"> -->

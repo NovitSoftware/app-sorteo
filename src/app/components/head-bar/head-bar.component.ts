@@ -7,27 +7,29 @@ import { Version } from 'src/app/app.component';
   styleUrls: ['./head-bar.component.scss']
 })
 export class HeadBarComponent implements OnInit {
+  @Input() displayVersion!: Version;
+  @Input() status!: { start: boolean, finish: boolean };
 
-    @Input() displayVersion!: Version;
-    @Input() status!: {start: boolean, finish: boolean};
+  @Output() fireResetearSorteo = new EventEmitter();
+  currentYear: number;
 
-    @Output() fireResetearSorteo = new EventEmitter();
+  constructor() {
+    this.currentYear = new Date().getFullYear();
+   }
 
-    constructor() { }
+  ngOnInit(): void {
+  }
 
-    ngOnInit(): void {
+  resetearSorteo(force: boolean = false) {
+    if (this.status.finish || force) {
+      this.status.finish = false;
+      this.status.start = false;
+
+      this.fireResetearSorteo.emit();
     }
+  }
 
-    resetearSorteo(force: boolean = false){
-        if (this.status.finish || force){
-            this.status.finish = false;
-            this.status.start = false;
-
-            this.fireResetearSorteo.emit();
-        }
-    }
-
-    getVersion(){
-        return this.displayVersion === Version._2022 ? "2022" : "2024"
-    }
+  getVersion() {
+    return "2023";
+  }
 }

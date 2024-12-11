@@ -1,27 +1,17 @@
 <div id="initContainer" [ngClass]="{'hidden': status.start}">
-    <div id="empresasContainer">
-        <div class="sorteoContainer">
-            <h1 style="text-align: center;">
-                <mat-icon class="svgIcon" svgIcon="consultatioGrisOscuro"></mat-icon>
-            </h1>
-            <app-carga-listado #listadosConsultatio class="fullWidth"></app-carga-listado>
+    <div id="initContainer" [ngClass]="{'hidden': status.start}">
+        <div id="empresasContainer">
+            <div class="sorteoContainer">
+                <h1 style="text-align: center;">
+                    <mat-icon class="svgIcon" svgIcon="novitLogo"></mat-icon>
+                </h1>
+                <app-carga-listado #listadoswen class="fullWidth"></app-carga-listado>
+            </div>
         </div>
-        <div class="sorteoSeparator"></div>
-        <div class="sorteoContainer">
-            <h1>
-                <mat-icon class="scndIcon" svgIcon="nordeltaGrisOscuro"></mat-icon>
-            </h1>
-            <app-carga-listado #listadosNordelta class="fullWidth"></app-carga-listado>
-        </div>
-        <!-- <div class="sorteoSeparator"></div>
-        <div class="sorteoContainer">
-            <h1>ASSET</h1>
-            <app-carga-listado #listadosAsset class="fullWidth"></app-carga-listado>
-        </div> -->
     </div>
     
     <div id="actionsContainer" [ngClass]="{'hidden': status.start}">
-        <button mat-raised-button class="okBtn" [disabled]="disableStart()" (click)="comenzarSorteo()">COMENZAR SORTEO</button>
+        <button mat-raised-button class="okBtn" [disabled]="disableStart()" (click)="comenzarSorteo()">PREPARAR SORTEO</button>
     </div>
 </div>
 

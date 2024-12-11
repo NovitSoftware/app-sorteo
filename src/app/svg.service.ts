@@ -13,22 +13,12 @@ export class SvgService {
   ) { }
    init() {
     this.matIconRegistry.addSvgIcon(
-      "consultatioBlanco",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/consultatio-logo-blanco.svg")
-    );
-
-    this.matIconRegistry.addSvgIcon(
-      "nordeltaBlanco",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/nordelta-blanco.svg")
+      "novitLogo",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/logo-azul.svg")
     );
     this.matIconRegistry.addSvgIcon(
-      "consultatioGrisOscuro",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/consultatio-logo-grisOsc2.svg")
-    );
-
-    this.matIconRegistry.addSvgIcon(
-      "nordeltaGrisOscuro",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/nordelta-grisOsc.svg")
+      "novitLogoBlanco",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/logo-blanco.svg")
     );
   }
 }

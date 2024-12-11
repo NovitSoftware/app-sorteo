@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { SvgService } from './svg.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,9 +15,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 // COMPONENTES
 import { AppComponent } from './app.component';
-import { Version2022Component } from './components/version2022/version2022.component';
-import { InitForm2022Component } from './components/version2022/init-form2022/init-form2022.component';
-import { SlotsSorteo2022Component } from './components/version2022/slots-sorteo2022/slots-sorteo2022.component';
 import { ResultadosComponent } from './components/resultados/resultados.component';
 import { HeadBarComponent } from './components/head-bar/head-bar.component';
 import { Version2023Component } from './components/version2023/version2023.component';
@@ -25,13 +22,9 @@ import { CargaListadoComponent } from './components/version2023/carga-listado/ca
 import { SlotsSorteo2023Component } from './components/version2023/slots-sorteo2023/slots-sorteo2023.component';
 import { AvisoSnackComponent } from './components/aviso-snack/aviso-snack.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    Version2022Component,
-    InitForm2022Component,
-    SlotsSorteo2022Component,
     ResultadosComponent,
     HeadBarComponent,
     Version2023Component,
@@ -49,7 +42,7 @@ import { AvisoSnackComponent } from './components/aviso-snack/aviso-snack.compon
     MatInputModule,
     ReactiveFormsModule,
     MatButtonToggleModule,
-    MatSnackBarModule, 
+    MatSnackBarModule,
     MatTooltipModule
   ],
   providers: [SvgService],

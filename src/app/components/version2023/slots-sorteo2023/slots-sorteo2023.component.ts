@@ -11,7 +11,7 @@ export class SlotsSorteo2023Component implements OnInit {
     @Input() status!: {start: boolean, finish: boolean};
 
     sorteos!: Sorteos;
-    empresaSorteando: "consultatio"|"nordelta"= "consultatio";
+    empresaSorteando: "wen" = "wen";
     indexPremio: number = 0;
         
     // RESULTADOS SORTEO
@@ -76,12 +76,8 @@ export class SlotsSorteo2023Component implements OnInit {
         }
     }
 
-    get consultatioResults() {
-        return this.results?.filter(result => result.empresa === 'consultatio') || [];
-    }
-
-    get nordeltaResults() {
-        return this.results?.filter(result => result.empresa === 'nordelta') || [];
+    get wenResults() {
+        return this.results?.filter(result => result.empresa === 'wen') || [];
     }
 
     async generateWinner(){
@@ -129,7 +125,7 @@ export class SlotsSorteo2023Component implements OnInit {
     }
     
     async generateInterval(): Promise<void> {
-        const empresas = ["consultatio", "nordelta"] as const;
+        const empresas = ["wen"] as const;
     
         for (const empresa of empresas) {
             this.empresaSorteando = empresa;
@@ -220,15 +216,13 @@ export class SlotsSorteo2023Component implements OnInit {
         this.sorteoHasStarted = false;
         this.setDefaultIntervalValues();
         this.indexPremio = 0;
-        this.empresaSorteando = "consultatio";
+        this.empresaSorteando = "wen";
     }
 
 }
 
 export interface Sorteos {
-    consultatio: Sorteo,
-    nordelta: Sorteo
-    // asset: Sorteo
+    wen: Sorteo
 }
 
 export interface Sorteo {

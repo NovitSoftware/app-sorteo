@@ -1,9 +1,11 @@
 @import "app-colors.scss";
-
+app-head-bar{
+    background: $color-primary-blue;  
+}
 #app {
     width: 100%;
     height: 100%;
-    background: $color-primary-black;
+    background: $color-primary-blue;
     display: flex;
     flex-direction: column;
     overflow-y: auto;

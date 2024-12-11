@@ -1,5 +1,6 @@
 <div id="resultados" [ngClass]="{'noMargin version2023': columnaDerecha === 'Participante'}" #resultadosContainer>
   <div class="empresaTittle">
+    <br>
     <mat-icon class="{{classEmpresa}}" svgIcon="{{sgvIconEmpresa}}">
     </mat-icon>
   </div>
@@ -8,7 +9,7 @@
     <span>{{columnaDerecha}}</span>
   </div>
   @for (result of visibleResults; track result) {
-    <div [@fadeIn] class="resultadoContainer itemsTabla">
+    <div [@zoomInOut] class="resultadoContainer itemsTabla">
       <span>{{result.premio}}</span>
       <div>{{result.texto}}</div>
     </div>

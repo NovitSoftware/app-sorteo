@@ -2,7 +2,8 @@
 
   @if (status.finish) {
     <div class="finDeSorteo">
-      <h2>Felicitaciones ganadores, los contactaremos mañana</h2>
+      <br>
+      <mat-icon class="svgIcon" svgIcon="novitLogo"></mat-icon>
     </div>
   }
 
@@ -21,6 +22,9 @@
         </div>
       }
     </div>
+    <br>
+    <br>
+    <br>
     <div id="randomGeneratorStrings">
       <span [ngClass]="{'darkBlue': !sorteando, 'clearBlue': sorteando}" class="animate numberFormat">
         {{ countDown }}
@@ -28,55 +32,17 @@
     </div>
   }
 
-  @if (TESTEANDO_RULETA) {
-    <div>
-      <span class="inputTitle">Configuración de Ruleta</span>
-      <form [formGroup]="TESTEO_CONFIG" class="inputs" style="width: 450px; display: flex; justify-content: space-between; flex-wrap: wrap;">
-        <mat-form-field class="inputNumero" appearance="fill">
-          <mat-label>Micro segundos inicial</mat-label>
-          <input formControlName="microSeg" matInput type="number">
-        </mat-form-field>
-        <mat-form-field class="inputNumero" appearance="fill">
-          <mat-label>Sumar micro segundos</mat-label>
-          <input formControlName="microSeg_agregar" matInput type="number">
-        </mat-form-field>
-        <mat-form-field class="inputNumero" appearance="fill">
-          <mat-label>Sumar micro seg suspenso</mat-label>
-          <input formControlName="microSeg_suspenso" matInput type="number">
-        </mat-form-field>
-        <mat-form-field class="inputNumero" appearance="fill">
-          <mat-label>Repeticiones</mat-label>
-          <input formControlName="repetir_N_veces" matInput type="number">
-        </mat-form-field>
-        <mat-form-field class="inputNumero" appearance="fill">
-          <mat-label>Restar repeticiones</mat-label>
-          <input formControlName="restarRepeticiones" matInput type="text">
-        </mat-form-field>
-        <mat-form-field class="inputNumero" appearance="fill">
-          <mat-label>Restar repeticiones suspenso</mat-label>
-          <input formControlName="restarRepeticiones_suspenso" matInput type="text">
-        </mat-form-field>
-      </form>
-    </div>
-  }
 
   @if (status.finish) {
     <div id="tablaResultadosContainer" class="twoColumns">
       <app-resultados 
         classEmpresa="svgIcon"
-        sgvIconEmpresa="consultatioGrisOscuro"
-        [results]="consultatioResults" 
-        columnaDerecha="Participante" 
+        sgvIconEmpresa="wenGrisOscuro"
+        [results]="wenResults" 
+        columnaDerecha="Ganador" 
         class="fullWidth">
       </app-resultados>
       <div class="sorteoSeparator"></div>
-      <app-resultados 
-        classEmpresa="scndIcon"
-        sgvIconEmpresa="nordeltaGrisOscuro"
-        [results]="nordeltaResults" 
-        columnaDerecha="Participante" 
-        class="fullWidth">
-      </app-resultados>
     </div>
   }
   
