@@ -110,7 +110,7 @@ export class SlotsSorteo2023Component implements OnInit {
     
 
     async runCountdown(countDownElement: HTMLElement) {
-        for (let i = 10; i >= 0; i--) {
+        for (let i = 10; i > 0; i--) {
             this.countDown = i.toString(); // Actualiza el countdown visual
     
             this.renderer.removeClass(countDownElement, 'animate');

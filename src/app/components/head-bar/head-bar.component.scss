@@ -1,10 +1,11 @@
+@import "app-colors.scss";
 #headBar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
     margin: 0px 150px;
-    background-color: #0A0089; // Actualiza el color de fondo
+    background-color: $color-primary-blue; // Actualiza el color de fondo
     .sorteo {
         font-family: 'LatinxText-Bold';
     }

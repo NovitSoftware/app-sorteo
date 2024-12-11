@@ -14,7 +14,7 @@ export class SvgService {
    init() {
     this.matIconRegistry.addSvgIcon(
       "novitLogo",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/logo-azul.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/icons/tecnovoz_logo.png")
     );
     this.matIconRegistry.addSvgIcon(
       "novitLogoBlanco",

@@ -1,5 +1,7 @@
 import { Component, ViewChild, ElementRef, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import confetti from 'canvas-confetti';
+
 
 @Component({
   selector: 'app-resultados',
@@ -7,20 +9,20 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
   styleUrls: ['./resultados.component.scss'],
   animations: [
     trigger('zoomInOut', [
-    transition(':enter', [
-      animate('1s ease-in-out', keyframes([
-        style({ transform: 'scale(0.5)', offset: 0 }),
-        style({ transform: 'scale(1.2)', offset: 0.5 }),
-        style({ transform: 'scale(1)', offset: 1 })
-      ]))
+      transition(':enter', [
+        animate('1s ease-in-out', keyframes([
+          style({ transform: 'scale(0.5)', offset: 0 }),
+          style({ transform: 'scale(1.2)', offset: 0.5 }),
+          style({ transform: 'scale(1)', offset: 1 })
+        ]))
+      ])
+    ]),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
     ])
-  ]),
-  trigger('fadeIn', [
-    transition(':enter', [
-      style({ opacity: 0, transform: 'translateY(10px)' }),
-      animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
-    ])
-  ])
   ]
 })
 export class ResultadosComponent implements OnInit {
@@ -55,8 +57,28 @@ export class ResultadosComponent implements OnInit {
       this.visibleResults.push(this.results[i]); // Agrega el resultado a la lista visible
       this.cdr.detectChanges(); // Asegura que el DOM esté actualizado
       this.scrollToBottom(); // Realiza el scroll al final
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Espera 2 segundos
+
+      if (i < this.results.length - 1) //no espera si es el ultimo
+        await new Promise(resolve => setTimeout(resolve, 5000)); // Espera unos segundos
     }
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Espera un segundo
+    this.showConfetti();
+    this.animateWinners();
+  }
+
+  private showConfetti(): void {
+    confetti({
+      particleCount: 500,
+      spread: 90,
+      origin: { y: 0.6 }
+    });
+  }
+
+  private animateWinners(): void {
+    const elements = document.querySelectorAll('.winner');
+    elements.forEach(element => {
+      element.classList.add('dance');
+    });
   }
 
   ngOnInit(): void {
